@@ -61,6 +61,9 @@ nav {
   background: #0d1b2a;
   border-bottom: 1px solid #162b4d;
   padding-top: env(safe-area-inset-top);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 /* Tier 1 — chapter tabs */
 .nav-tier1 {
@@ -1399,7 +1402,7 @@ async function sha256(str) {
 
 function showApp() {
   document.getElementById('gate').classList.add('unlocked');
-  document.getElementById('mainNav').style.display = 'block';
+  document.getElementById('mainNav').style.display = 'flex';
 }
 
 // Persist unlock in sessionStorage so refreshing doesn't re-prompt
