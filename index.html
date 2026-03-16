@@ -67,7 +67,9 @@ nav {
 .nav-tier1 {
   display: flex; align-items: stretch; height: 40px;
   border-bottom: 1px solid rgba(255,255,255,0.06);
+  overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
 }
+.nav-tier1::-webkit-scrollbar { display: none; }
 .nav-logo {
   font-family: 'Nicky Sans', system-ui, sans-serif;
   font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
