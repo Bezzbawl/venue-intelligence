@@ -7,14 +7,10 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Venue Intelligence">
 <meta name="theme-color" content="#0d1b2a">
-<meta name="description" content="Venue Audience Intelligence — Caesars Superdome & US Bank Stadium. Confidential market analysis, audience personas, and hospitality bidder strategy.">
+<meta name="description" content="Venue Audience Intelligence — Caesars Superdome & US Bank Stadium. Hospitality · Sponsorship · Audience Strategy.">
 <meta name="robots" content="noindex, nofollow">
-<meta property="og:title" content="Venue Audience Intelligence">
-<meta property="og:description" content="Market analysis · Audience personas · Hospitality strategy">
-<meta property="og:type" content="website">
 <title>Venue Audience Intelligence</title>
 <style>
-/* ── LEGENDS BRAND FONTS ── */
 @font-face { font-family: 'Nicky Sans'; src: url('fonts/NickySans-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Nicky Sans'; src: url('fonts/NickySans-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Nicky Sans'; src: url('fonts/NickySans-Medium.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
@@ -39,12 +35,13 @@
   --muted: #6b7280;
   --divider: #f3f4f6;
   --card-bg: #ffffff;
+  --spons: #7B5EA7;
+  --spons-light: #EEE9F5;
+  --spons-dark: #5A4180;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
-
 body {
   font-family: 'Nicky Sans', system-ui, sans-serif;
   background: #f9fafb;
@@ -55,17 +52,14 @@ body {
   padding-right: env(safe-area-inset-right);
 }
 
-/* ── NAV — two-tier ── */
+/* ── NAV ── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   background: #0d1b2a;
   border-bottom: 1px solid #162b4d;
   padding-top: env(safe-area-inset-top);
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  display: flex; flex-direction: column; width: 100%;
 }
-/* Tier 1 — chapter tabs */
 .nav-tier1 {
   display: flex; align-items: stretch; height: 40px;
   border-bottom: 1px solid rgba(255,255,255,0.06);
@@ -82,16 +76,15 @@ nav {
 }
 .nav-tab {
   font-family: 'Nicky Sans', system-ui, sans-serif;
-  font-size: 12px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
   color: rgba(255,255,255,0.32);
   background: transparent; border: none;
   border-right: 1px solid rgba(255,255,255,0.05);
-  padding: 0 1.1rem; cursor: pointer; white-space: nowrap;
+  padding: 0 0.9rem; cursor: pointer; white-space: nowrap;
   display: flex; align-items: center; gap: 5px;
   transition: color 0.18s, background 0.18s;
   position: relative;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent;
 }
 .nav-tab::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
@@ -100,19 +93,19 @@ nav {
 .nav-tab:hover { color: rgba(255,255,255,0.65); background: rgba(255,255,255,0.03); }
 .nav-tab.active { color: white; }
 .nav-tab[data-ch="overview"].active::after  { background: var(--gold); }
-.nav-tab[data-ch="nola"].active             { color: #F0907A; }
-.nav-tab[data-ch="nola"].active::after      { background: var(--nola); }
-.nav-tab[data-ch="mpls"].active             { color: #6ABDD8; }
-.nav-tab[data-ch="mpls"].active::after      { background: var(--mpls); }
+.nav-tab[data-ch="nola-hosp"].active        { color: #F0907A; }
+.nav-tab[data-ch="nola-hosp"].active::after { background: var(--nola); }
+.nav-tab[data-ch="nola-spons"].active       { color: #C9A0DC; }
+.nav-tab[data-ch="nola-spons"].active::after{ background: var(--spons); }
+.nav-tab[data-ch="mpls-hosp"].active        { color: #6ABDD8; }
+.nav-tab[data-ch="mpls-hosp"].active::after { background: var(--mpls); }
+.nav-tab[data-ch="mpls-spons"].active       { color: #C9A0DC; }
+.nav-tab[data-ch="mpls-spons"].active::after{ background: var(--spons); }
 .nav-tab[data-ch="data"].active::after      { background: #9B8ABF; }
 .nav-tab[data-ch="personas"].active::after  { background: rgba(255,255,255,0.45); }
 .nav-tab[data-ch="strategy"].active::after  { background: var(--gold); }
-/* venue colour dot on nola/mpls tabs */
-.tab-dot {
-  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; opacity: 0.65;
-}
+.tab-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; opacity: 0.65; }
 
-/* Tier 2 — contextual sub-pages */
 .nav-tier2 {
   height: 30px; display: flex; align-items: center;
   padding: 0 0.85rem; gap: 2px;
@@ -127,16 +120,47 @@ nav {
   padding: 2px 9px; border-radius: 4px;
   cursor: pointer; white-space: nowrap; flex-shrink: 0;
   transition: all 0.15s;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent;
 }
 .nav-sub:hover { color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.14); }
 .nav-sub.active { color: white; background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.2); }
-/* chapter-tinted active pills */
-.nav-tier2[data-ch="nola"]     .nav-sub.active { color: #F0907A; background: rgba(184,80,66,0.12); border-color: rgba(184,80,66,0.35); }
-.nav-tier2[data-ch="mpls"]     .nav-sub.active { color: #6ABDD8; background: rgba(28,95,122,0.14); border-color: rgba(28,95,122,0.35); }
-.nav-tier2[data-ch="strategy"] .nav-sub.active { color: var(--gold); background: rgba(255,192,0,0.1); border-color: rgba(255,192,0,0.3); }
-.nav-sep { width: 1px; height: 14px; background: rgba(255,255,255,0.1); flex-shrink: 0; margin: 0 5px; }
+.nav-tier2[data-ch="nola-hosp"]  .nav-sub.active { color: #F0907A; background: rgba(184,80,66,0.12); border-color: rgba(184,80,66,0.35); }
+.nav-tier2[data-ch="nola-spons"] .nav-sub.active { color: #C9A0DC; background: rgba(123,94,167,0.12); border-color: rgba(123,94,167,0.35); }
+.nav-tier2[data-ch="mpls-hosp"]  .nav-sub.active { color: #6ABDD8; background: rgba(28,95,122,0.14); border-color: rgba(28,95,122,0.35); }
+.nav-tier2[data-ch="mpls-spons"] .nav-sub.active { color: #C9A0DC; background: rgba(123,94,167,0.12); border-color: rgba(123,94,167,0.35); }
+.nav-tier2[data-ch="strategy"]   .nav-sub.active { color: var(--gold); background: rgba(255,192,0,0.1); border-color: rgba(255,192,0,0.3); }
+
+/* ── CHAPTER DIVIDER BANNERS ── */
+.chapter-divider {
+  padding: 3.5rem 7vw;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative;
+}
+.chapter-divider-nola-hosp { background: var(--nola); }
+.chapter-divider-nola-spons { background: var(--spons-dark); }
+.chapter-divider-mpls-hosp { background: var(--mpls-dark); }
+.chapter-divider-mpls-spons { background: #3A2D6E; }
+.chapter-divider-strategy { background: var(--navy); }
+.chapter-track {
+  font-family: 'Nicky Sans', system-ui, sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5); margin-bottom: 0.5rem;
+}
+.chapter-divider-title {
+  font-family: 'Nicky Sans', system-ui, sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300;
+  color: white; line-height: 1.1;
+}
+.chapter-divider-sub {
+  font-size: 15px; color: rgba(255,255,255,0.55); margin-top: 0.75rem;
+  font-weight: 300; max-width: 640px; line-height: 1.6;
+}
+.chapter-number {
+  position: absolute; right: 7vw; top: 50%; transform: translateY(-50%);
+  font-family: 'Nicky Sans', system-ui, sans-serif;
+  font-size: clamp(4rem, 8vw, 8rem); font-weight: 800;
+  color: rgba(255,255,255,0.06); line-height: 1; user-select: none;
+}
 
 /* ── SECTION BASE ── */
 .slide {
@@ -148,8 +172,10 @@ nav {
 .slide-dark { background: #0d1b2a; }
 .slide-light { background: #f9fafb; color: #374151; }
 .slide-cream { background: #f9fafb; color: #374151; }
+.slide-spons { background: #F7F4FC; color: #374151; }
+.accent-bar-left { position: absolute; left: 0; top: 0; bottom: 0; width: 5px; }
 
-/* ── EYEBROW / LABELS ── */
+/* ── TYPOGRAPHY ── */
 .eyebrow {
   font-family: 'Nicky Sans', system-ui, sans-serif;
   font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
@@ -158,153 +184,82 @@ nav {
 .eyebrow-gold { color: var(--gold); }
 .eyebrow-nola { color: var(--nola); }
 .eyebrow-mpls { color: var(--mpls); }
+.eyebrow-spons { color: var(--spons); }
 .eyebrow-muted { color: var(--muted); }
-
-/* ── TYPOGRAPHY ── */
 h1.display {
   font-family: 'Nicky Sans', system-ui, sans-serif;
-  font-size: clamp(3rem, 6vw, 5.5rem);
-  font-weight: 300; line-height: 1.05; letter-spacing: -0.01em;
-  color: var(--off-white);
+  font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 300; line-height: 1.05;
+  letter-spacing: -0.01em; color: var(--off-white);
 }
 h2.section-title {
   font-family: 'Nicky Sans', system-ui, sans-serif;
-  font-size: clamp(2rem, 3.5vw, 3rem);
-  font-weight: 400; line-height: 1.1;
-  margin-bottom: 0.5rem;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 400; line-height: 1.1; margin-bottom: 0.5rem;
 }
-.slide-light h2.section-title, .slide-cream h2.section-title { color: var(--navy); }
+.slide-light h2.section-title, .slide-cream h2.section-title, .slide-spons h2.section-title { color: var(--navy); }
 .slide-dark h2.section-title { color: var(--off-white); }
 
-h3.card-title {
-  font-family: 'Nicky Sans', system-ui, sans-serif;
-  font-size: 16px; font-weight: 700; letter-spacing: 0.03em;
-  text-transform: uppercase; margin-bottom: 0.4rem;
-}
-p.body { font-size: 15px; line-height: 1.75; font-weight: 300; }
-p.caption { font-size: 12px; color: var(--muted); margin-top: 0.3rem; }
-
-/* ── DECORATIVE ELEMENTS ── */
-.accent-bar-left {
-  position: absolute; left: 0; top: 0; bottom: 0;
-  width: 5px;
-}
-.slide-dark .accent-bar-left { background: var(--gold); }
-.nola-accent .accent-bar-left { background: var(--nola); }
-.mpls-accent .accent-bar-left { background: var(--mpls); }
-
-.big-number {
-  font-family: 'Nicky Sans', system-ui, sans-serif;
-  font-size: clamp(4rem, 8vw, 7rem);
-  font-weight: 300; line-height: 1;
-  letter-spacing: -0.02em;
-}
-
-/* ── COVER SLIDE ── */
-#slide-1 {
-  background: var(--navy);
-  padding-top: 2rem;
-  justify-content: center;
-}
-.cover-grid {
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: 4rem;
-  align-items: center;
-  max-width: 1200px;
-}
-.cover-left { padding-left: 5px; }
-.cover-tagline {
-  font-size: 14px; color: var(--gold);
-  letter-spacing: 0.1em; margin-bottom: 1.5rem;
-  font-family: 'Nicky Sans', system-ui, sans-serif; font-weight: 600; text-transform: uppercase;
-}
-.cover-subtitle {
-  font-size: 16px; color: var(--muted); margin-top: 1.5rem;
-  font-weight: 300; line-height: 1.6;
-}
-.cover-meta {
-  margin-top: 3rem; padding-top: 1.5rem;
-  border-top: 1px solid rgba(255,192,0,0.25);
-  font-size: 12px; color: var(--muted); letter-spacing: 0.05em;
-  display: flex; gap: 2.5rem;
-}
+/* ── COVER ── */
+#slide-1 { background: var(--navy); padding-top: 2rem; justify-content: center; }
+.cover-grid { display: grid; grid-template-columns: 1fr 340px; gap: 4rem; align-items: center; max-width: 1200px; }
+.cover-tagline { font-size: 14px; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 1.5rem; font-family: 'Nicky Sans', system-ui, sans-serif; font-weight: 600; text-transform: uppercase; }
+.cover-subtitle { font-size: 16px; color: var(--muted); margin-top: 1.5rem; font-weight: 300; line-height: 1.6; }
+.cover-meta { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,192,0,0.25); font-size: 12px; color: var(--muted); letter-spacing: 0.05em; display: flex; gap: 2rem; flex-wrap: wrap; }
 .cover-meta span { display: flex; flex-direction: column; gap: 2px; }
 .cover-meta strong { color: var(--off-white); font-size: 15px; font-weight: 500; }
+.cover-focus-pills { margin-top: 1.5rem; display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.focus-pill { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; border: 1px solid; }
+.pill-hosp { color: var(--gold); border-color: rgba(255,192,0,0.4); background: rgba(255,192,0,0.08); }
+.pill-spons { color: #C9A0DC; border-color: rgba(123,94,167,0.4); background: rgba(123,94,167,0.1); }
 .venue-stack { display: flex; flex-direction: column; gap: 8px; }
-.venue-block {
-  padding: 1.5rem 1.75rem;
-  border-left: 4px solid;
-}
+.venue-block { padding: 1.5rem 1.75rem; border-left: 4px solid; }
 .venue-block.nola-block { border-color: var(--nola); background: rgba(184,80,66,0.12); }
 .venue-block.mpls-block { border-color: var(--mpls); background: rgba(28,95,122,0.12); }
-.venue-block-label {
-  font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 11px;
-  font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
-  margin-bottom: 0.3rem;
-}
+.venue-block-label { font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.3rem; }
 .nola-block .venue-block-label { color: var(--nola); }
 .mpls-block .venue-block-label { color: var(--mpls); }
-.venue-block-name {
-  font-family: 'Nicky Sans', system-ui, sans-serif;
-  font-size: 22px; font-weight: 600; color: var(--off-white);
-  line-height: 1.1; margin-bottom: 0.2rem;
-}
+.venue-block-name { font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 22px; font-weight: 600; color: var(--off-white); line-height: 1.1; margin-bottom: 0.2rem; }
 .venue-block-city { font-size: 12px; color: var(--muted); }
 
 /* ── METHODOLOGY ── */
-.method-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
-  margin-top: 2.5rem;
-}
-.method-card {
-  background: #ffffff;
-  border-radius: 12px;
-  border: 1px solid #f3f4f6;
-  padding: 20px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  position: relative;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-.method-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
-}
-.method-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-}
+.method-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+.method-card { background: #ffffff; border-radius: 12px; border: 1px solid #f3f4f6; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); position: relative; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.method-card:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
+.method-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 12px 12px 0 0; }
 .method-card.gold::before { background: var(--gold); }
 .method-card.nola-c::before { background: var(--nola); }
 .method-card.mpls-c::before { background: var(--mpls); }
-.method-num {
-  font-family: 'Nicky Sans', system-ui, sans-serif;
-  font-size: 48px; font-weight: 300; line-height: 1;
-  margin-bottom: 0.75rem;
-}
+.method-num { font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 48px; font-weight: 300; line-height: 1; margin-bottom: 0.75rem; }
 .method-card.gold .method-num { color: var(--gold); }
 .method-card.nola-c .method-num { color: var(--nola); }
 .method-card.mpls-c .method-num { color: var(--mpls); }
 .method-card h3 { color: var(--navy); font-size: 15px; font-weight: 600; margin-bottom: 0.6rem; }
 .method-card p { font-size: 13.5px; color: var(--slate); line-height: 1.65; font-weight: 300; }
-.method-footer {
-  margin-top: 2rem; padding-top: 1.25rem;
-  border-top: 1px solid var(--divider);
-  font-size: 12px; color: var(--muted);
-}
+.method-footer { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--divider); font-size: 12px; color: var(--muted); }
 
-/* ── SNAPSHOT COMPARISON ── */
-.snapshot-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
-  margin-top: 2rem;
-}
+/* ── TWO-TRACK OVERVIEW ── */
+.two-track-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+.track-card { border-radius: 12px; padding: 2rem; position: relative; overflow: hidden; }
+.track-card.hosp-track { background: linear-gradient(135deg, rgba(255,192,0,0.08), rgba(31,56,100,0.06)); border: 1px solid rgba(255,192,0,0.2); }
+.track-card.spons-track { background: linear-gradient(135deg, rgba(123,94,167,0.08), rgba(45,31,74,0.06)); border: 1px solid rgba(123,94,167,0.2); }
+.track-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.track-label { font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.hosp-track .track-label { color: var(--gold); }
+.spons-track .track-label { color: var(--spons); }
+.track-title { font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 24px; font-weight: 400; color: var(--navy); margin-bottom: 0.75rem; line-height: 1.2; }
+.track-desc { font-size: 13.5px; color: var(--slate); line-height: 1.7; font-weight: 300; }
+.track-bullets { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.track-bullet { font-size: 12.5px; color: var(--muted); display: flex; gap: 0.5rem; align-items: flex-start; line-height: 1.45; }
+.track-bullet::before { content: '→'; flex-shrink: 0; font-weight: 600; margin-top: 1px; }
+.hosp-track .track-bullet::before { color: var(--gold); }
+.spons-track .track-bullet::before { color: var(--spons); }
+
+/* ── SNAPSHOT ── */
+.snapshot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
 .snapshot-col { padding: 2rem; }
 .snapshot-col.nola-col { background: var(--nola-light); border-top: 4px solid var(--nola); }
 .snapshot-col.mpls-col { background: var(--mpls-light); border-top: 4px solid var(--mpls); }
-.snapshot-header {
-  font-family: 'Nicky Sans', system-ui, sans-serif;
-  font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
-  margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid;
-}
+.snapshot-header { font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid; }
 .nola-col .snapshot-header { color: var(--nola-dark); border-color: rgba(184,80,66,0.2); }
 .mpls-col .snapshot-header { color: var(--mpls-dark); border-color: rgba(28,95,122,0.2); }
 .stat-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -317,51 +272,21 @@ p.caption { font-size: 12px; color: var(--muted); margin-top: 0.3rem; }
 .stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; line-height: 1.3; }
 
 /* ── MARKET DEEP DIVE ── */
-.market-layout {
-  display: grid; grid-template-columns: 1fr 380px; gap: 4rem;
-  align-items: start; margin-top: 2rem;
-}
-.market-body { }
+.market-layout { display: grid; grid-template-columns: 1fr 380px; gap: 4rem; align-items: start; margin-top: 2rem; }
 .market-section { margin-bottom: 1.75rem; }
-.market-section-label {
-  font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
-  margin-bottom: 0.4rem;
-}
-.slide-light .market-section-label { color: var(--nola); }
-.slide-cream .market-section-label { color: var(--mpls); }
+.market-section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.4rem; }
 .market-section p { font-size: 14px; line-height: 1.75; color: var(--slate); font-weight: 300; }
 .market-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--divider); }
-.mstat {
-  background: #ffffff;
-  padding: 1.25rem 1.25rem 1rem;
-  border-radius: 8px;
-}
+.mstat { background: #ffffff; padding: 1.25rem 1.25rem 1rem; border-radius: 8px; }
 .mstat-val { font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 34px; font-weight: 600; line-height: 1; }
-.nola-accent .mstat-val { color: var(--nola); }
-.mpls-accent .mstat-val { color: var(--mpls); }
 .mstat-label { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.35; }
 .mstat-source { font-size: 10px; color: #B0B8C4; margin-top: 2px; font-style: italic; }
 
 /* ── EVENT MIX ── */
-.event-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;
-}
-.event-card {
-  background: #ffffff;
-  border-radius: 12px;
-  border: 1px solid #f3f4f6;
-  padding: 1.25rem 1.25rem 1.25rem 1.5rem;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  position: relative;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-.event-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
-}
-.event-card::before {
-  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
-}
+.event-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+.event-card { background: #ffffff; border-radius: 12px; border: 1px solid #f3f4f6; padding: 1.25rem 1.25rem 1.25rem 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); position: relative; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.event-card:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
+.event-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; border-radius: 12px 0 0 12px; }
 .event-card.tier-a::before { background: var(--nola); }
 .event-card.tier-b::before { background: var(--gold); }
 .event-card.tier-c::before { background: var(--mpls); }
@@ -376,56 +301,89 @@ p.caption { font-size: 12px; color: var(--muted); margin-top: 0.3rem; }
 .tier-c .event-buyers, .tier-cm .event-buyers { color: var(--mpls); }
 .event-desc { font-size: 12.5px; color: var(--muted); line-height: 1.55; font-weight: 300; }
 
-/* ── DATA TENSIONS TABLE ── */
+/* ── CORPORATE LANDSCAPE ── */
+.corp-landscape-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+.corp-card { border-radius: 12px; padding: 1.5rem; background: #ffffff; border: 1px solid var(--divider); box-shadow: 0 1px 3px rgba(0,0,0,0.04); transition: transform 0.15s, box-shadow 0.15s; }
+.corp-card:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.07); }
+.corp-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+.corp-name { font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 17px; font-weight: 600; color: var(--navy); line-height: 1.2; }
+.corp-rank { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; white-space: nowrap; margin-left: 0.5rem; flex-shrink: 0; }
+.rank-f500 { background: rgba(255,192,0,0.12); color: #856500; border: 1px solid rgba(255,192,0,0.3); }
+.rank-f1000 { background: rgba(31,56,100,0.08); color: var(--navy); border: 1px solid rgba(31,56,100,0.2); }
+.rank-private { background: rgba(107,114,128,0.1); color: var(--muted); border: 1px solid rgba(107,114,128,0.2); }
+.rank-regional { background: rgba(184,80,66,0.1); color: var(--nola-dark); border: 1px solid rgba(184,80,66,0.2); }
+.corp-industry { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem; }
+.corp-desc { font-size: 13px; color: var(--slate); line-height: 1.6; font-weight: 300; }
+.corp-spons-fit { margin-top: 0.85rem; padding-top: 0.75rem; border-top: 1px solid var(--divider); font-size: 12px; color: var(--spons-dark); font-weight: 600; }
+.corp-spons-fit span { color: var(--muted); font-weight: 300; }
+
+/* ── SPONSOR CATEGORY TARGETS ── */
+.cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.cat-card { border-radius: 10px; padding: 1.25rem; border: 1px solid; position: relative; overflow: hidden; transition: transform 0.15s, box-shadow 0.15s; }
+.cat-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+.cat-card.priority-high { border-color: rgba(123,94,167,0.35); background: rgba(123,94,167,0.05); }
+.cat-card.priority-mid  { border-color: rgba(31,56,100,0.2);  background: rgba(31,56,100,0.03); }
+.cat-card.priority-grow { border-color: rgba(22,163,74,0.25); background: rgba(22,163,74,0.04); }
+.cat-priority { font-size: 9px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.4rem; }
+.priority-high .cat-priority { color: var(--spons); }
+.priority-mid  .cat-priority { color: var(--navy); }
+.priority-grow .cat-priority { color: #16a34a; }
+.cat-name { font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 0.4rem; }
+.cat-targets { font-size: 12px; color: var(--muted); line-height: 1.55; font-weight: 300; }
+.cat-rationale { font-size: 11.5px; color: var(--slate); line-height: 1.5; font-weight: 300; margin-top: 0.6rem; font-style: italic; }
+
+/* ── ASSET INVENTORY ── */
+.asset-table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
+.asset-table th { text-align: left; font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); padding: 0.6rem 1rem; border-bottom: 2px solid var(--navy); background: var(--off-white); }
+.asset-table td { padding: 0.85rem 1rem; font-size: 13px; vertical-align: top; line-height: 1.55; border-bottom: 1px solid var(--divider); color: var(--slate); }
+.asset-table tr:nth-child(even) td { background: rgba(0,0,0,0.015); }
+.asset-table td:first-child { font-weight: 700; color: var(--navy); font-size: 12.5px; width: 18%; }
+.asset-tier { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; margin-bottom: 2px; }
+.tier-prem { background: rgba(255,192,0,0.15); color: #856500; }
+.tier-mid2 { background: rgba(123,94,167,0.12); color: var(--spons-dark); }
+.tier-base { background: rgba(107,114,128,0.1); color: var(--muted); }
+.asset-value { font-size: 12px; font-weight: 600; color: var(--navy); }
+.asset-callout { margin-top: 1.5rem; padding: 1rem 1.25rem; background: rgba(123,94,167,0.06); border-left: 3px solid var(--spons); font-size: 13px; color: var(--slate); line-height: 1.65; font-style: italic; }
+
+/* ── COMP SET ── */
+.comp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 2rem; }
+.comp-card { background: #ffffff; border-radius: 10px; padding: 1.25rem; border: 1px solid var(--divider); box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.comp-venue { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+.comp-sponsor { font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 17px; font-weight: 600; color: var(--navy); margin-bottom: 0.3rem; }
+.comp-category { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 9px; border-radius: 3px; display: inline-block; margin-bottom: 0.6rem; }
+.comp-fin { background: rgba(31,56,100,0.08); color: var(--navy); }
+.comp-bev { background: rgba(184,80,66,0.08); color: var(--nola-dark); }
+.comp-health { background: rgba(22,163,74,0.08); color: #15803d; }
+.comp-tech { background: rgba(123,94,167,0.1); color: var(--spons-dark); }
+.comp-retail { background: rgba(255,192,0,0.12); color: #856500; }
+.comp-auto { background: rgba(55,65,81,0.08); color: var(--slate); }
+.comp-notes { font-size: 12.5px; color: var(--muted); line-height: 1.55; font-weight: 300; }
+.comp-insight { margin-top: 0.6rem; font-size: 12px; color: var(--spons-dark); font-weight: 600; }
+.comp-insight span { color: var(--muted); font-weight: 300; }
+
+/* ── DATA TENSIONS ── */
 .tension-intro { font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 2rem; font-weight: 300; max-width: 700px; }
 .tension-table { width: 100%; border-collapse: collapse; }
-.tension-table th {
-  text-align: left; font-family: 'Nicky Sans', system-ui, sans-serif;
-  font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--muted); padding: 0.6rem 1rem;
-  border-bottom: 2px solid var(--navy);
-  background: var(--off-white);
-}
+.tension-table th { text-align: left; font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); padding: 0.6rem 1rem; border-bottom: 2px solid var(--navy); background: var(--off-white); }
 .tension-table td { padding: 0.85rem 1rem; font-size: 13px; vertical-align: top; line-height: 1.55; border-bottom: 1px solid var(--divider); color: var(--slate); }
 .tension-table tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
 .tension-table td:first-child { font-weight: 600; color: var(--navy); font-size: 12px; width: 14%; }
 .tension-table td:nth-child(4) { font-weight: 600; color: var(--navy-mid); }
-.tension-callout {
-  margin-top: 1.5rem; padding: 1rem 1.25rem;
-  background: rgba(255,192,0,0.08); border-left: 3px solid var(--gold);
-  font-size: 13px; color: var(--slate); line-height: 1.65; font-style: italic;
-}
+.tension-callout { margin-top: 1.5rem; padding: 1rem 1.25rem; background: rgba(255,192,0,0.08); border-left: 3px solid var(--gold); font-size: 13px; color: var(--slate); line-height: 1.65; font-style: italic; }
 
 /* ── PERSONA OVERVIEW ── */
-#slide-9 { background: #1F3864; }
-.persona-overview-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
-  background: rgba(255,255,255,0.05);
-  margin-top: 2rem;
-}
-.persona-overview-card {
-  background: rgba(255,255,255,0.03);
-  padding: 1.5rem 1.25rem;
-  cursor: pointer;
-  transition: background 0.2s;
-  border-top: 3px solid transparent;
-}
+#slide-personas-overview { background: #1F3864; }
+.persona-overview-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,0.05); margin-top: 2rem; }
+.persona-overview-card { background: rgba(255,255,255,0.03); padding: 1.5rem 1.25rem; cursor: pointer; transition: background 0.2s; border-top: 3px solid transparent; }
 .persona-overview-card:hover { background: rgba(255,255,255,0.07); }
 .po-name { font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 18px; font-weight: 400; color: var(--off-white); margin-bottom: 0.4rem; line-height: 1.2; }
 .po-venue { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; }
 .po-attrs { font-size: 11.5px; color: rgba(255,255,255,0.45); line-height: 1.6; }
 .po-share { margin-top: 0.75rem; font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 20px; font-weight: 300; }
-.persona-overview-card.row2 { }
-.po-row2 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.05); }
 
-/* ── PERSONA DETAIL SLIDES ── */
+/* ── PERSONA DETAIL ── */
 .persona-slide { background: var(--off-white); color: var(--slate); }
-.persona-header {
-  padding: 1.5rem 7vw;
-  margin: -48px -7vw 2rem;
-  padding-top: calc(48px + 1.5rem);
-  padding-left: 7vw; padding-right: 7vw;
-}
+.persona-header { padding: 1.5rem 7vw; margin: -48px -7vw 2rem; padding-top: calc(48px + 1.5rem); padding-left: 7vw; padding-right: 7vw; }
 .persona-header.nola-ph { background: var(--nola); }
 .persona-header.mpls-ph { background: var(--mpls); }
 .persona-header.gold-ph { background: var(--navy-mid); }
@@ -436,11 +394,7 @@ p.caption { font-size: 12px; color: var(--muted); margin-top: 0.3rem; }
 .ph-name { font-family: 'Nicky Sans', system-ui, sans-serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400; color: white; line-height: 1.05; }
 .ph-tagline { font-size: 15px; color: rgba(255,255,255,0.7); margin-top: 0.4rem; font-style: italic; font-weight: 300; }
 .ph-meta { display: flex; gap: 2rem; margin-top: 1rem; flex-wrap: wrap; }
-.ph-tag {
-  font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-  background: rgba(255,255,255,0.15); padding: 4px 12px; border-radius: 4px;
-  color: white;
-}
+.ph-tag { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; background: rgba(255,255,255,0.15); padding: 4px 12px; border-radius: 4px; color: white; }
 .persona-body { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
 .persona-col-label { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 2px solid; }
 .persona-section { margin-bottom: 1.75rem; }
@@ -453,24 +407,18 @@ p.caption { font-size: 12px; color: var(--muted); margin-top: 0.3rem; }
 .personicx-tag { display: inline-block; background: rgba(0,0,0,0.05); padding: 3px 10px; border-radius: 2px; font-size: 11px; color: var(--muted); margin-top: 0.5rem; font-style: italic; }
 
 /* ── BIDDER STRATEGY ── */
-.strategy-hero {
-  margin: 2rem 0;
-  padding: 1.25rem 1.75rem;
-  border-left: 4px solid;
-}
+.strategy-hero { margin: 2rem 0; padding: 1.25rem 1.75rem; border-left: 4px solid; }
 .nola-strategy .strategy-hero { border-color: var(--nola); background: rgba(184,80,66,0.06); }
 .mpls-strategy .strategy-hero { border-color: var(--mpls); background: rgba(28,95,122,0.06); }
+.nola-spons-strat .strategy-hero { border-color: var(--spons); background: rgba(123,94,167,0.06); }
+.mpls-spons-strat .strategy-hero { border-color: var(--spons); background: rgba(123,94,167,0.06); }
 .strategy-hero-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.35rem; }
 .strategy-hero-text { font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 20px; font-weight: 400; line-height: 1.4; }
 .nola-strategy .strategy-hero-text { color: var(--nola-dark); }
 .mpls-strategy .strategy-hero-text { color: var(--mpls-dark); }
+.nola-spons-strat .strategy-hero-text, .mpls-spons-strat .strategy-hero-text { color: var(--spons-dark); }
 .strategy-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-.strategy-col { }
-.strat-header {
-  padding: 0.6rem 1rem; margin-bottom: 0;
-  font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 12px; font-weight: 700;
-  letter-spacing: 0.12em; text-transform: uppercase; color: white;
-}
+.strat-header { padding: 0.6rem 1rem; margin-bottom: 0; font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: white; }
 .strat-header.do-header { background: #16a34a; }
 .strat-header.dont-header { background: #dc2626; }
 .strat-body { background: var(--card-bg); border: 1px solid var(--divider); border-top: none; padding: 1rem; }
@@ -481,114 +429,50 @@ p.caption { font-size: 12px; color: var(--muted); margin-top: 0.3rem; }
 .strat-icon.dont { color: #dc2626; }
 
 /* ── TAKEAWAYS ── */
-#slide-19 { background: #0d1b2a; }
+#slide-takeaways { background: #0d1b2a; }
 .takeaway-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
-.takeaway-card {
-  background: rgba(255,255,255,0.05);
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 2rem;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  position: relative;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-.takeaway-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(0,0,0,0.2);
-}
-.takeaway-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.takeaway-card { background: rgba(255,255,255,0.05); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); padding: 2rem; position: relative; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.takeaway-card:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,0,0,0.2); }
+.takeaway-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 12px 12px 0 0; }
 .takeaway-card.t1::before { background: var(--nola); }
 .takeaway-card.t2::before { background: var(--mpls); }
 .takeaway-card.t3::before { background: var(--gold); }
-.takeaway-card.t4::before { background: #7F77DD; }
+.takeaway-card.t4::before { background: var(--spons); }
+.takeaway-card.t5::before { background: rgba(255,255,255,0.3); }
+.takeaway-card.t6::before { background: #16a34a; }
 .takeaway-num { font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 52px; font-weight: 300; line-height: 1; margin-bottom: 0.25rem; }
 .t1 .takeaway-num { color: var(--nola); }
 .t2 .takeaway-num { color: var(--mpls); }
 .t3 .takeaway-num { color: var(--gold); }
-.t4 .takeaway-num { color: #7F77DD; }
+.t4 .takeaway-num { color: var(--spons); }
+.t5 .takeaway-num { color: rgba(255,255,255,0.4); }
+.t6 .takeaway-num { color: #4ade80; }
 .takeaway-venue { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
 .takeaway-card p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.6); font-weight: 300; }
-
-/* ── SCROLL ARROWS ── */
-.slide-nav {
-  position: absolute; bottom: 2rem; left: 50%;
-  transform: translateX(-50%);
-  display: flex; align-items: center; gap: 1.5rem;
-}
-.slide-nav button {
-  background: none; border: 1.5px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.4);
-  width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 14px;
-  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
-}
-.slide-nav button:hover { border-color: var(--gold); color: var(--gold); }
-.slide-counter { font-size: 11px; color: var(--muted); letter-spacing: 0.05em; }
-
-/* ── SECTION DIVIDERS (full bleed) ── */
-.section-divider {
-  padding: 5rem 7vw;
-  text-align: center;
-  position: relative;
-}
-.divider-label {
-  display: inline-block;
-  font-family: 'Nicky Sans', system-ui, sans-serif;
-  font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
-  padding: 6px 20px;
-  margin-bottom: 1.5rem;
-}
-.divider-nola { background: var(--nola); color: white; }
-.divider-mpls { background: var(--mpls); color: white; }
-.divider-gold { background: var(--gold); color: var(--navy); }
-.divider-title {
-  font-family: 'Nicky Sans', system-ui, sans-serif;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 300; color: var(--off-white); line-height: 1.1;
-}
 
 /* ── ANIMATIONS ── */
 .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-/* ── LEGENDS BRAND UTILITIES ── */
-@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-.card-lift { transition: transform 0.15s ease, box-shadow 0.15s ease; }
-.card-lift:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
-.metric-up { color: #16a34a; }
-.metric-down { color: #dc2626; }
-.btn-primary { background: #1F3864; color: #ffffff; border-radius: 12px; padding: 10px 16px; font-weight: 600; border: none; cursor: pointer; }
-.btn-primary:hover { background: #162b4d; }
-.btn-accent { background: #FFC000; color: #0d1b2a; border-radius: 12px; padding: 10px 16px; font-weight: 600; border: none; cursor: pointer; }
-.btn-accent:hover { background: #e5ac00; }
-
-/* ── TABLET (iPad) ── */
+/* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .cover-grid, .market-layout, .persona-body, .strategy-cols,
-  .snapshot-grid, .method-grid, .takeaway-grid, .event-grid { grid-template-columns: 1fr; }
+  .snapshot-grid, .method-grid, .takeaway-grid, .event-grid,
+  .two-track-grid, .corp-landscape-grid, .comp-grid { grid-template-columns: 1fr; }
   .persona-overview-grid { grid-template-columns: repeat(2, 1fr); }
+  .cat-grid { grid-template-columns: repeat(2, 1fr); }
   .slide { padding: 40px 5vw 50px; }
   .tension-table td:nth-child(2), .tension-table td:nth-child(3) { display: none; }
 }
-
-/* ── MOBILE (iPhone) ── */
 @media (max-width: 430px) {
   .slide { padding: 28px 1.25rem max(2.5rem, env(safe-area-inset-bottom)); }
-  .section-title { font-size: 1.4rem !important; }
-  .cover-title { font-size: 2rem !important; }
-  .gate-title { font-size: 2rem !important; }
   .persona-overview-grid { grid-template-columns: 1fr; }
+  .cat-grid, .comp-grid { grid-template-columns: 1fr; }
   .nav-tier1, .nav-tier2 { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; white-space: nowrap; }
   .nav-tier1::-webkit-scrollbar, .nav-tier2::-webkit-scrollbar { display: none; }
-  .nav-tab, .nav-sub { min-height: 44px; min-width: 44px; display: inline-flex; align-items: center; flex-shrink: 0; }
+  .nav-tab, .nav-sub { min-height: 44px; display: inline-flex; align-items: center; flex-shrink: 0; }
   .method-grid, .event-grid, .takeaway-grid { grid-template-columns: 1fr; }
-  .snapshot-col { padding: 1.25rem; }
-  .mstat { padding: 0.75rem 0; }
-  .mstat-val { font-size: 1.5rem; }
-  .tension-table { font-size: 12px; }
-  .tension-table td { padding: 0.5rem; }
-  nav { padding: 0 1rem; padding-top: env(safe-area-inset-top); }
-  .nav-logo { font-size: 11px; }
-  .diag-grid, .market-cols, .strat-grid { grid-template-columns: 1fr !important; }
-  .persona-full-modal { padding: 1.5rem 1.25rem max(1.5rem, env(safe-area-inset-bottom)); }
+  .chapter-number { display: none; }
 }
 </style>
 </head>
@@ -596,56 +480,21 @@ p.caption { font-size: 12px; color: var(--muted); margin-top: 0.3rem; }
 
 <!-- ════ PASSWORD GATE ════════════════════════════════════════════════════ -->
 <style>
-#gate {
-  position: fixed; inset: 0; z-index: 9999;
-  background: #0d1b2a;
-  display: flex; align-items: center; justify-content: center;
-}
+#gate { position: fixed; inset: 0; z-index: 9999; background: #0d1b2a; display: flex; align-items: center; justify-content: center; }
 #gate.unlocked { display: none; }
-.gate-inner {
-  width: 100%; max-width: 400px; padding: 0 2rem;
-  display: flex; flex-direction: column; align-items: center;
-}
-.gate-wordmark {
-  font-family: 'Nicky Sans', system-ui, sans-serif;
-  font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
-  color: #FFC000; margin-bottom: 3rem;
-}
-.gate-title {
-  font-family: 'Nicky Sans', system-ui, sans-serif;
-  font-size: 2.6rem; font-weight: 300; line-height: 1.1;
-  color: #f9fafb; text-align: center; margin-bottom: 0.4rem;
-}
-.gate-sub {
-  font-size: 13px; color: #6b7280; text-align: center;
-  font-weight: 300; margin-bottom: 2.5rem;
-}
-.gate-field {
-  width: 100%; padding: 0.9rem 1rem;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 8px; color: #f9fafb;
-  font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 15px;
-  outline: none; transition: border-color 0.2s; letter-spacing: 0.05em;
-  margin-bottom: 0.75rem;
-}
+.gate-inner { width: 100%; max-width: 400px; padding: 0 2rem; display: flex; flex-direction: column; align-items: center; }
+.gate-wordmark { font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: #FFC000; margin-bottom: 3rem; }
+.gate-title { font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 2.6rem; font-weight: 300; line-height: 1.1; color: #f9fafb; text-align: center; margin-bottom: 0.4rem; }
+.gate-sub { font-size: 13px; color: #6b7280; text-align: center; font-weight: 300; margin-bottom: 2.5rem; }
+.gate-field { width: 100%; padding: 0.9rem 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #f9fafb; font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 15px; outline: none; transition: border-color 0.2s; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
 .gate-field::placeholder { color: rgba(255,255,255,0.22); }
 .gate-field:focus { border-color: #FFC000; }
-.gate-btn {
-  width: 100%; padding: 0.85rem;
-  background: #FFC000; color: #0d1b2a; border: none; border-radius: 12px;
-  font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 13px;
-  font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
-  cursor: pointer; transition: background 0.2s; margin-bottom: 0.5rem;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-}
+.gate-btn { width: 100%; padding: 0.85rem; background: #FFC000; color: #0d1b2a; border: none; border-radius: 12px; font-family: 'Nicky Sans', system-ui, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; margin-bottom: 0.5rem; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 .gate-btn:hover { background: #e5ac00; }
 .gate-err { font-size: 12px; color: #dc2626; text-align: center; height: 18px; }
 .gate-rule { width: 48px; height: 1px; background: rgba(255,192,0,0.25); margin: 2rem auto; }
 .gate-meta { font-size: 11px; color: rgba(255,255,255,0.18); text-align: center; letter-spacing: 0.04em; }
 </style>
-
 <div id="gate">
   <div class="gate-inner">
     <div class="gate-wordmark">Venue Audience Intelligence</div>
@@ -661,34 +510,37 @@ p.caption { font-size: 12px; color: var(--muted); margin-top: 0.3rem; }
 
 <!-- ── NAVIGATION ── -->
 <nav id="mainNav" style="display:none">
-  <!-- Tier 1: Chapter tabs -->
   <div class="nav-tier1">
     <div class="nav-logo">Venue Intelligence</div>
     <button class="nav-tab active" data-ch="overview">Overview</button>
-    <button class="nav-tab" data-ch="nola"><span class="tab-dot" style="background:var(--nola)"></span>New Orleans</button>
-    <button class="nav-tab" data-ch="mpls"><span class="tab-dot" style="background:var(--mpls)"></span>Minneapolis</button>
+    <button class="nav-tab" data-ch="nola-hosp"><span class="tab-dot" style="background:var(--nola)"></span>NOLA Hospitality</button>
+    <button class="nav-tab" data-ch="nola-spons"><span class="tab-dot" style="background:var(--spons)"></span>NOLA Sponsorship</button>
+    <button class="nav-tab" data-ch="mpls-hosp"><span class="tab-dot" style="background:var(--mpls)"></span>MPLS Hospitality</button>
+    <button class="nav-tab" data-ch="mpls-spons"><span class="tab-dot" style="background:var(--spons)"></span>MPLS Sponsorship</button>
     <button class="nav-tab" data-ch="data">Analysis</button>
     <button class="nav-tab" data-ch="personas">Personas</button>
     <button class="nav-tab" data-ch="strategy">Strategy</button>
   </div>
-  <!-- Tier 2: Contextual sub-pages (swapped by JS on scroll / tab click) -->
   <div class="nav-tier2" id="navTier2" data-ch="overview">
     <button class="nav-sub active" data-slide="slide-1">Cover</button>
     <button class="nav-sub" data-slide="slide-2">Methods</button>
     <button class="nav-sub" data-slide="slide-3">At a Glance</button>
+    <button class="nav-sub" data-slide="slide-4">Two Tracks</button>
   </div>
 </nav>
 
-<!-- ════════════════════════════════════════════════════
-     SLIDE 1 — COVER
-════════════════════════════════════════════════════ -->
+<!-- OVERVIEW CHAPTER -->
 <section class="slide slide-dark" id="slide-1" data-label="Cover">
-  <div class="accent-bar-left"></div>
+  <div class="accent-bar-left" style="background:var(--gold)"></div>
   <div class="cover-grid">
     <div class="cover-left fade-in">
-      <div class="cover-tagline">Market Analysis · Audience Personas · Hospitality Strategy</div>
+      <div class="cover-tagline">Hospitality · Sponsorship · Audience Strategy</div>
       <h1 class="display">Venue Audience<br><em>Intelligence</em></h1>
-      <div class="cover-subtitle">A data-driven portrait of 421,322 ticket buyers across two of America's marquee venues — enriched with Acxiom demographics and U.S. Census ACS 2024 market context.</div>
+      <div class="cover-subtitle">A data-driven portrait of 421,322 ticket buyers across two marquee venues — enriched with Acxiom demographics, U.S. Census ACS 2024 market context, and a dual-track strategy for winning both <strong style="color:var(--gold)">F&amp;B hospitality</strong> and <strong style="color:#C9A0DC">sponsorship sales</strong> business.</div>
+      <div class="cover-focus-pills">
+        <span class="focus-pill pill-hosp">🍽 F&amp;B / Hospitality</span>
+        <span class="focus-pill pill-spons">🤝 Sponsorship Sales</span>
+      </div>
       <div class="cover-meta">
         <span><strong>421,322</strong> buyer records</span>
         <span><strong>2 years</strong> ticketing window</span>
@@ -711,9 +563,6 @@ p.caption { font-size: 12px; color: var(--muted); margin-top: 0.3rem; }
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════
-     SLIDE 2 — METHODOLOGY
-════════════════════════════════════════════════════ -->
 <section class="slide slide-light" id="slide-2" data-label="Methods">
   <div class="eyebrow eyebrow-muted">About the Data</div>
   <h2 class="section-title">What This Analysis Is Built On</h2>
@@ -730,16 +579,13 @@ p.caption { font-size: 12px; color: var(--muted); margin-top: 0.3rem; }
     </div>
     <div class="method-card mpls-c">
       <div class="method-num">03</div>
-      <h3>U.S. Census ACS 2024</h3>
-      <p>American Community Survey 2024 one-year estimates layered against buyer data to contextualize the sample against actual metro populations — revealing self-selection gaps and untapped market potential.</p>
+      <h3>U.S. Census ACS 2024 + Corporate Research</h3>
+      <p>ACS 2024 one-year estimates layered against buyer data. Supplemented by Fortune 500/1000 headquarters data, regional brand landscape research, and current venue sponsorship comp set analysis.</p>
     </div>
   </div>
-  <div class="method-footer fade-in">Total records analyzed: 421,322 &nbsp;·&nbsp; Ticketing window: past 2 years &nbsp;·&nbsp; Key methodology note: census data used to identify self-selection bias in the buyer sample — buyers are not a random cross-section of each metro population.</div>
+  <div class="method-footer fade-in">Total records analyzed: 421,322 &nbsp;·&nbsp; Ticketing window: past 2 years &nbsp;·&nbsp; Dual-track output: F&amp;B/Hospitality + Sponsorship strategy for both venues</div>
 </section>
 
-<!-- ════════════════════════════════════════════════════
-     SLIDE 3 — AT A GLANCE
-════════════════════════════════════════════════════ -->
 <section class="slide slide-cream" id="slide-3" data-label="Snapshot">
   <div class="eyebrow eyebrow-muted">At a Glance</div>
   <h2 class="section-title">Two Venues. Two Very Different Markets.</h2>
@@ -751,10 +597,10 @@ p.caption { font-size: 12px; color: var(--muted); margin-top: 0.3rem; }
         <div class="stat-item"><div class="stat-val">$62K</div><div class="stat-label">metro median HH income (census)</div></div>
         <div class="stat-item"><div class="stat-val">$87K</div><div class="stat-label">buyer median HH income</div></div>
         <div class="stat-item"><div class="stat-val">64%</div><div class="stat-label">female buyers</div></div>
-        <div class="stat-item"><div class="stat-val">52%</div><div class="stat-label">single households</div></div>
+        <div class="stat-item"><div class="stat-val">1</div><div class="stat-label">Fortune 500 HQ (Entergy)</div></div>
+        <div class="stat-item"><div class="stat-val">19M</div><div class="stat-label">annual visitors · $10.4B spend</div></div>
         <div class="stat-item"><div class="stat-val">36%</div><div class="stat-label">Black buyers vs. 55% of city</div></div>
         <div class="stat-item"><div class="stat-val">70%</div><div class="stat-label">buyers with children</div></div>
-        <div class="stat-item"><div class="stat-val">19M</div><div class="stat-label">annual visitors to New Orleans</div></div>
       </div>
     </div>
     <div class="snapshot-col mpls-col">
@@ -764,8 +610,8 @@ p.caption { font-size: 12px; color: var(--muted); margin-top: 0.3rem; }
         <div class="stat-item"><div class="stat-val">$98K</div><div class="stat-label">metro median HH income (census)</div></div>
         <div class="stat-item"><div class="stat-val">$125K</div><div class="stat-label">buyer median HH income</div></div>
         <div class="stat-item"><div class="stat-val">54%</div><div class="stat-label">female buyers</div></div>
-        <div class="stat-item"><div class="stat-val">60%</div><div class="stat-label">married households</div></div>
         <div class="stat-item"><div class="stat-val">17</div><div class="stat-label">Fortune 500 HQs in metro</div></div>
+        <div class="stat-item"><div class="stat-val">#1</div><div class="stat-label">Fortune 500 concentration per capita</div></div>
         <div class="stat-item"><div class="stat-val">74%</div><div class="stat-label">buyers with children</div></div>
         <div class="stat-item"><div class="stat-val">37%</div><div class="stat-label">high-wealth Personicx tier</div></div>
       </div>
@@ -773,11 +619,48 @@ p.caption { font-size: 12px; color: var(--muted); margin-top: 0.3rem; }
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════
-     SLIDE 4 — NEW ORLEANS MARKET
-════════════════════════════════════════════════════ -->
-<section class="slide slide-light nola-accent" id="slide-4" data-label="NOLA Market">
-  <div class="accent-bar-left"></div>
+<section class="slide slide-light" id="slide-4" data-label="Two Tracks">
+  <div class="eyebrow eyebrow-gold">Strategic Framework</div>
+  <h2 class="section-title">Two Business Lines. One Integrated Opportunity.</h2>
+  <p style="font-size:14px;color:var(--muted);max-width:700px;font-weight:300;line-height:1.7;margin-bottom:0.5rem">This analysis is structured as parallel tracks — for each venue, we examine the Hospitality/F&amp;B opportunity and the Sponsorship opportunity separately, then bring them together in the strategy section. They reinforce each other: a premium hospitality experience validates premium sponsorship pricing, and the right sponsor partners enhance the guest experience.</p>
+  <div class="two-track-grid fade-in">
+    <div class="track-card hosp-track">
+      <div class="track-icon">🍽</div>
+      <div class="track-label">Track One</div>
+      <div class="track-title">F&amp;B &amp; Hospitality</div>
+      <div class="track-desc">Winning the food &amp; beverage concession and premium hospitality contracts. Grounded in audience demographics, income data, event-specific programming needs, and per-cap revenue optimization.</div>
+      <div class="track-bullets">
+        <div class="track-bullet">Market income context &amp; price architecture</div>
+        <div class="track-bullet">Event-by-event audience programming</div>
+        <div class="track-bullet">7 audience persona F&amp;B recommendations</div>
+        <div class="track-bullet">Bid do's and don'ts for each venue</div>
+      </div>
+    </div>
+    <div class="track-card spons-track">
+      <div class="track-icon">🤝</div>
+      <div class="track-label">Track Two</div>
+      <div class="track-title">Sponsorship Sales</div>
+      <div class="track-desc">Winning sponsorship revenue from brands aligned with each market's corporate landscape. Grounded in Fortune 500/1000 footprint, regional brand identity, audience-brand fit, asset inventory, and comp set intelligence.</div>
+      <div class="track-bullets">
+        <div class="track-bullet">Fortune 500/1000 corporate landscape per market</div>
+        <div class="track-bullet">Category-by-category target brand analysis</div>
+        <div class="track-bullet">Sponsorship asset inventory &amp; tier pricing</div>
+        <div class="track-bullet">Current comp set &amp; whitespace opportunities</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 1: NOLA HOSPITALITY -->
+<div class="chapter-divider chapter-divider-nola-hosp" id="ch-nola-hosp" data-ch-start="nola-hosp">
+  <div class="chapter-track">Chapter One · New Orleans</div>
+  <div class="chapter-divider-title">Hospitality &amp;<br>F&amp;B Strategy</div>
+  <div class="chapter-divider-sub">Caesars Superdome — Market context, audience data, event programming, and how to win the concession contract.</div>
+  <div class="chapter-number">01</div>
+</div>
+
+<section class="slide slide-light" id="slide-nola-market" data-label="NOLA Market">
+  <div class="accent-bar-left" style="background:var(--nola)"></div>
   <div class="eyebrow eyebrow-nola">New Orleans Market</div>
   <h2 class="section-title">A City That Eats for Sport</h2>
   <div class="market-layout fade-in">
@@ -788,43 +671,40 @@ p.caption { font-size: 12px; color: var(--muted); margin-top: 0.3rem; }
       </div>
       <div class="market-section">
         <div class="market-section-label" style="color:var(--nola)">The income gap that matters</div>
-        <p>The metro median household income is $62K (census) — but Acxiom buyers average $87K. The audience is the upper half of a low-income market. 18% of metro residents live below the poverty line, compared to a national average of 12.2%. The Superdome audience is not a reflection of the city's full economic reality.</p>
+        <p>The metro median household income is $62K — but Acxiom buyers average $87K. The audience is the upper half of a low-income market. 18% of metro residents live below the poverty line vs. a national average of 12.2%. Don't calibrate pricing to your buyer sample alone.</p>
       </div>
       <div class="market-section">
         <div class="market-section-label" style="color:var(--nola)">The representation gap</div>
-        <p>New Orleans' city population is 55% Black, yet only 36% of identified buyers are Black. Events like Essence Festival and the Bayou Classic close this gap intentionally — and they deserve culturally authentic F&B investment that the rest of the calendar does not always receive.</p>
+        <p>New Orleans' city population is 55% Black, yet only 36% of identified buyers are Black. Events like Essence Festival and the Bayou Classic close this gap — they deserve culturally authentic F&amp;B investment that the rest of the calendar does not always receive.</p>
       </div>
       <div class="market-section">
         <div class="market-section-label" style="color:var(--nola)">The tourism overlay</div>
-        <p>New Orleans welcomed 19.08 million visitors in 2024, spending $10.4 billion — generating nearly 40% of the city's operating budget. A meaningful slice of Superdome attendance is tourist, not local. These visitors have elevated event-day spend appetite and are looking for an authentically New Orleans experience.</p>
+        <p>New Orleans welcomed 19.08 million visitors in 2024, spending $10.4 billion — generating nearly 40% of the city's operating budget. A meaningful slice of Superdome attendance is tourist. These visitors have elevated event-day spend appetite and are looking for an authentically New Orleans experience.</p>
       </div>
     </div>
     <div class="market-stats">
-      <div class="mstat"><div class="mstat-val">$62K</div><div class="mstat-label">Metro median HH income</div><div class="mstat-source">ACS 2024</div></div>
-      <div class="mstat"><div class="mstat-val">18%</div><div class="mstat-label">Metro poverty rate</div><div class="mstat-source">ACS 2024 · U.S. avg 12.2%</div></div>
-      <div class="mstat"><div class="mstat-val">55%</div><div class="mstat-label">City population Black/AA</div><div class="mstat-source">Census 2024</div></div>
-      <div class="mstat"><div class="mstat-val">19M</div><div class="mstat-label">Annual visitors (2024)</div><div class="mstat-source">New Orleans & Company</div></div>
-      <div class="mstat"><div class="mstat-val">$10.4B</div><div class="mstat-label">Annual visitor spend</div><div class="mstat-source">MMGY / N.O. & Co. 2024</div></div>
-      <div class="mstat"><div class="mstat-val">80K+</div><div class="mstat-label">Hospitality sector jobs</div><div class="mstat-source">Industry data</div></div>
+      <div class="mstat"><div class="mstat-val" style="color:var(--nola)">$62K</div><div class="mstat-label">Metro median HH income</div><div class="mstat-source">ACS 2024</div></div>
+      <div class="mstat"><div class="mstat-val" style="color:var(--nola)">18%</div><div class="mstat-label">Metro poverty rate</div><div class="mstat-source">ACS 2024 · U.S. avg 12.2%</div></div>
+      <div class="mstat"><div class="mstat-val" style="color:var(--nola)">55%</div><div class="mstat-label">City population Black/AA</div><div class="mstat-source">Census 2024</div></div>
+      <div class="mstat"><div class="mstat-val" style="color:var(--nola)">19M</div><div class="mstat-label">Annual visitors (2024)</div><div class="mstat-source">New Orleans &amp; Company</div></div>
+      <div class="mstat"><div class="mstat-val" style="color:var(--nola)">$10.4B</div><div class="mstat-label">Annual visitor spend</div><div class="mstat-source">MMGY / N.O. &amp; Co. 2024</div></div>
+      <div class="mstat"><div class="mstat-val" style="color:var(--nola)">80K+</div><div class="mstat-label">Hospitality sector jobs</div><div class="mstat-source">Industry data</div></div>
     </div>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════
-     SLIDE 5 — NOLA EVENT MIX
-════════════════════════════════════════════════════ -->
-<section class="slide slide-cream" id="slide-5" data-label="NOLA Events">
+<section class="slide slide-cream" id="slide-nola-events" data-label="NOLA Events">
   <div class="eyebrow eyebrow-nola">New Orleans — Event Mix</div>
   <h2 class="section-title">A Venue of Many Communities</h2>
-  <p style="font-size:14px;color:var(--muted);margin-bottom:0.5rem;font-weight:300;max-width:750px">The Superdome's event calendar serves culturally distinct audiences. A single F&B program cannot serve them all equally — event-aware programming is table stakes.</p>
+  <p style="font-size:14px;color:var(--muted);margin-bottom:0.5rem;font-weight:300;max-width:750px">The Superdome's event calendar serves culturally distinct audiences. A single F&amp;B program cannot serve them all equally — event-aware programming is table stakes.</p>
   <div class="event-grid fade-in">
     <div class="event-card tier-a">
       <div class="event-header"><span class="event-name">Taylor Swift — Eras Tour</span><span class="event-buyers">47,825 buyers</span></div>
-      <div class="event-desc">Young women, families, high energy, social media–driven. Top per-cap opportunity for novelty items and premium cocktails. Highest single-event buyer volume in the 2-year window.</div>
+      <div class="event-desc">Young women, families, high energy. Top per-cap opportunity for novelty items and premium cocktails. Highest single-event buyer volume in the 2-year window.</div>
     </div>
     <div class="event-card tier-a">
       <div class="event-header"><span class="event-name">Essence Festival</span><span class="event-buyers">6,800+ buyers</span></div>
-      <div class="event-desc">Predominantly Black female audience with strong brand loyalty and disposable income. Authentic NOLA food culture is a baseline expectation — not a differentiator.</div>
+      <div class="event-desc">Predominantly Black female audience with strong brand loyalty. Authentic NOLA food culture is a baseline expectation — not a differentiator.</div>
     </div>
     <div class="event-card tier-a">
       <div class="event-header"><span class="event-name">Bayou Classic (HBCU)</span><span class="event-buyers">6,400+ buyers</span></div>
@@ -832,7 +712,7 @@ p.caption { font-size: 12px; color: var(--muted); margin-top: 0.3rem; }
     </div>
     <div class="event-card tier-b">
       <div class="event-header"><span class="event-name">Chris Brown / Bruno Mars</span><span class="event-buyers">13,000–12,000</span></div>
-      <div class="event-desc">Diverse urban audience. R&B demographic overlaps strongly with NOLA cultural identity. Value plus premium cocktail upsell is the winning combination.</div>
+      <div class="event-desc">Diverse urban audience. R&amp;B demographic overlaps strongly with NOLA cultural identity. Value plus premium cocktail upsell is the winning combination.</div>
     </div>
     <div class="event-card tier-c">
       <div class="event-header"><span class="event-name">Monster Jam</span><span class="event-buyers">14,229 buyers</span></div>
@@ -845,11 +725,125 @@ p.caption { font-size: 12px; color: var(--muted); margin-top: 0.3rem; }
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════
-     SLIDE 6 — MINNEAPOLIS MARKET
-════════════════════════════════════════════════════ -->
-<section class="slide slide-light mpls-accent" id="slide-6" data-label="MPLS Market">
-  <div class="accent-bar-left"></div>
+<!-- CHAPTER 2: NOLA SPONSORSHIP -->
+<div class="chapter-divider chapter-divider-nola-spons" id="ch-nola-spons" data-ch-start="nola-spons">
+  <div class="chapter-track">Chapter Two · New Orleans</div>
+  <div class="chapter-divider-title">Sponsorship Sales<br>Strategy</div>
+  <div class="chapter-divider-sub">Caesars Superdome — Corporate landscape, regional brand targets, asset inventory, and the sponsorship opportunity in a tourism-driven market.</div>
+  <div class="chapter-number">02</div>
+</div>
+
+<section class="slide slide-spons" id="slide-nola-corps" data-label="NOLA Corporate">
+  <div class="accent-bar-left" style="background:var(--spons)"></div>
+  <div class="eyebrow eyebrow-spons">New Orleans — Corporate Landscape</div>
+  <h2 class="section-title">One Fortune 500. A Rich Regional Brand Ecosystem.</h2>
+  <p style="font-size:14px;color:var(--muted);max-width:760px;font-weight:300;line-height:1.7;margin-bottom:1.5rem">New Orleans has only one Fortune 500 HQ (Entergy, ranked #355). The sponsorship play here is not corporate density — it is <strong>regional brand identity</strong>. The brands synonymous with Louisiana culture are deeply embedded in their communities and have strong motivation to align with the Superdome's cultural programming.</p>
+  <div class="corp-landscape-grid fade-in">
+    <div class="corp-card">
+      <div class="corp-card-header"><div><div class="corp-name">Entergy Corporation</div><div class="corp-industry">Energy / Utilities</div></div><span class="corp-rank rank-f500">Fortune 500 · #355</span></div>
+      <div class="corp-desc">New Orleans' only Fortune 500 HQ. Powers 3M+ customers across the Gulf South. Annual revenue ~$13.8B. Major employer with 12,000 employees. Has existing community investment programs tied to major events.</div>
+      <div class="corp-spons-fit">Sponsorship fit: <span>Energy category exclusivity, sustainability activation, community naming rights. Logical lead anchor partner given HQ proximity and community mission.</span></div>
+    </div>
+    <div class="corp-card">
+      <div class="corp-card-header"><div><div class="corp-name">Ochsner Health System</div><div class="corp-industry">Healthcare / Hospital Network</div></div><span class="corp-rank rank-private">Private · $4.5B+ rev</span></div>
+      <div class="corp-desc">Louisiana's largest private employer with 32,000+ employees. Operates the state's leading hospital network. Deep community roots, growing brand investment post-Katrina. Named sponsor of multiple community events.</div>
+      <div class="corp-spons-fit">Sponsorship fit: <span>Health &amp; wellness category, official health partner, event-day health activation. Strong fit for family events and community-oriented programming.</span></div>
+    </div>
+    <div class="corp-card">
+      <div class="corp-card-header"><div><div class="corp-name">Sazerac Company</div><div class="corp-industry">Spirits / Beverages</div></div><span class="corp-rank rank-private">Private · NOLA HQ</span></div>
+      <div class="corp-desc">Home of Buffalo Trace, Pappy Van Winkle, and the Sazerac cocktail itself — New Orleans' own spirit brand. Massive portfolio, deeply embedded in NOLA culture. One of the most culturally appropriate venue partners possible.</div>
+      <div class="corp-spons-fit">Sponsorship fit: <span>Premium spirits pouring rights, Sazerac bar concept, branded cocktail program. Strongest cultural authenticity play in the spirits category for this venue.</span></div>
+    </div>
+    <div class="corp-card">
+      <div class="corp-card-header"><div><div class="corp-name">Abita Brewing Company</div><div class="corp-industry">Craft Beer / Beverages</div></div><span class="corp-rank rank-regional">Louisiana Regional</span></div>
+      <div class="corp-desc">Louisiana's most iconic craft brewery, headquartered 30 miles from the Superdome. Abita Purple Haze, Amber, and Turbodog are cultural touchstones. Strong grassroots loyalty across all demographics.</div>
+      <div class="corp-spons-fit">Sponsorship fit: <span>Craft beer pouring rights, featured tap handles, co-branded activations. Essential inclusion in any authentic NOLA hospitality program.</span></div>
+    </div>
+    <div class="corp-card">
+      <div class="corp-card-header"><div><div class="corp-name">Pan-American Life Insurance</div><div class="corp-industry">Insurance / Financial Services</div></div><span class="corp-rank rank-private">Private · NOLA HQ</span></div>
+      <div class="corp-desc">Founded 1911, headquartered in New Orleans CBD. Operations across 47 states and Latin America. Strong community presence, B2B brand-building motivation, and growing footprint in the Gulf South market.</div>
+      <div class="corp-spons-fit">Sponsorship fit: <span>Financial services category, B2B hospitality suite packages, community goodwill activation. Underutilized sponsor category at NOLA venues.</span></div>
+    </div>
+    <div class="corp-card">
+      <div class="corp-card-header"><div><div class="corp-name">Smoothie King</div><div class="corp-industry">QSR / Food &amp; Beverage</div></div><span class="corp-rank rank-private">Private · NOLA Founded</span></div>
+      <div class="corp-desc">Founded in New Orleans in 1973. Now 1,400+ locations globally. Named the Smoothie King Center (Pelicans arena). Already activated in the NOLA sports sponsorship landscape.</div>
+      <div class="corp-spons-fit">Sponsorship fit: <span>Health/wellness F&amp;B category, concourse activation, cross-venue brand consistency across NOLA sports venues.</span></div>
+    </div>
+    <div class="corp-card">
+      <div class="corp-card-header"><div><div class="corp-name">Hancock Whitney Bank</div><div class="corp-industry">Banking / Financial Services</div></div><span class="corp-rank rank-private">Public · NOLA HQ · ~$1B rev</span></div>
+      <div class="corp-desc">Gulf South regional bank with deep Louisiana roots. Active community sponsor across NOLA cultural events, sports, and arts. Already activated in Saints ecosystem.</div>
+      <div class="corp-spons-fit">Sponsorship fit: <span>Banking category, community partner, ATM/payment integration. Strong regional alignment and existing NOLA sports sponsorship history.</span></div>
+    </div>
+    <div class="corp-card">
+      <div class="corp-card-header"><div><div class="corp-name">Pool Corporation</div><div class="corp-industry">Distribution / Outdoor Products</div></div><span class="corp-rank rank-f1000">Fortune 1000 · #634</span></div>
+      <div class="corp-desc">Headquartered in Covington, LA (30 miles from Superdome). World's largest wholesale distributor of swimming pool supplies. Growing brand investment and strong Gulf South footprint.</div>
+      <div class="corp-spons-fit">Sponsorship fit: <span>Outdoor lifestyle, family events, B2B hospitality. Non-endemic partner with upside for differentiated activation.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide slide-light" id="slide-nola-cats" data-label="NOLA Targets">
+  <div class="eyebrow eyebrow-spons">New Orleans — Sponsor Category Targets</div>
+  <h2 class="section-title">Where the Revenue Is. Where the Brand Fit Is.</h2>
+  <p style="font-size:14px;color:var(--muted);max-width:700px;font-weight:300;line-height:1.7;margin-bottom:0.5rem">NOLA's sponsorship strategy leads with cultural authenticity, regional brand identity, and the tourism economy. The strongest categories are those where brands can connect to the city's identity — not just reach a demographic.</p>
+  <div class="cat-grid fade-in">
+    <div class="cat-card priority-high"><div class="cat-priority">Priority High</div><div class="cat-name">Spirits &amp; Beer</div><div class="cat-targets">Sazerac, Abita, Jack Daniel's, Bacardi, Modelo, Tito's</div><div class="cat-rationale">NOLA's culture IS cocktail culture. Pouring rights + branded bar concepts are the highest-value category — especially with the tourist spend overlay.</div></div>
+    <div class="cat-card priority-high"><div class="cat-priority">Priority High</div><div class="cat-name">Healthcare</div><div class="cat-targets">Ochsner Health, LCMC Health, Blue Cross Blue Shield LA, Humana</div><div class="cat-rationale">Largest employers in NOLA. Ochsner alone employs 32K. Health system sponsorships are increasingly tied to community investment mandates.</div></div>
+    <div class="cat-card priority-high"><div class="cat-priority">Priority High</div><div class="cat-name">Energy &amp; Utilities</div><div class="cat-targets">Entergy (incumbent F500), Chevron Gulf of Mexico, Shell, BP Louisiana</div><div class="cat-rationale">Entergy is the obvious anchor. Gulf of Mexico oil/gas operations bring major regional employers. Energy category exclusivity should be structured to accommodate multiple tiers.</div></div>
+    <div class="cat-card priority-mid"><div class="cat-priority">Mid-Tier</div><div class="cat-name">Financial Services</div><div class="cat-targets">Hancock Whitney, Pan-American Life, Capital One (major NOLA employer), Gulf Coast Bank</div><div class="cat-rationale">Less corporate density than MPLS, but Gulf South banking has strong community ties and growing brand ambitions.</div></div>
+    <div class="cat-card priority-mid"><div class="cat-priority">Mid-Tier</div><div class="cat-name">Tourism &amp; Hospitality</div><div class="cat-targets">Hilton, Marriott, Delta Air Lines, United Airlines, Southwest</div><div class="cat-rationale">19M annual visitors = massive tourism brand spend in the market. Airlines and hotel chains are active sponsors at venues that see significant tourist attendance.</div></div>
+    <div class="cat-card priority-mid"><div class="cat-priority">Mid-Tier</div><div class="cat-name">QSR &amp; Food Brands</div><div class="cat-targets">Raising Cane's (NOLA founded), Popeyes (NOLA founded), Zatarain's, Community Coffee</div><div class="cat-rationale">Raising Cane's and Popeyes were both founded in Louisiana. Hometown brands with enormous activation potential — and motivation to show up in the Superdome.</div></div>
+    <div class="cat-card priority-grow"><div class="cat-priority">Growth Opportunity</div><div class="cat-name">Tech / Telecom</div><div class="cat-targets">Cox Communications (NOLA HQ), Lumen Technologies (Monroe LA F500), AT&amp;T Gulf South</div><div class="cat-rationale">Cox is headquartered in New Orleans and is the dominant telecom provider. This is an underactivated category with naming rights and digital integration potential.</div></div>
+    <div class="cat-card priority-grow"><div class="cat-priority">Growth Opportunity</div><div class="cat-name">Auto</div><div class="cat-targets">Toyota (regional supply chain), Chevrolet, Ford Gulf South dealers</div><div class="cat-rationale">Auto sponsorship is underdeveloped at the Superdome relative to the market. Dealer group activations offer lower barriers to entry and strong event-day integration.</div></div>
+    <div class="cat-card priority-grow"><div class="cat-priority">Growth Opportunity</div><div class="cat-name">Retail / CPG</div><div class="cat-targets">Walmart (Gulf South stronghold), Community Coffee, Zatarain's (McCormick), Reily Foods</div><div class="cat-rationale">Locally-made CPG brands have strong NOLA identity alignment. Community Coffee is Louisiana's own — a natural fit for concourse or suite program branding.</div></div>
+  </div>
+</section>
+
+<section class="slide slide-spons" id="slide-nola-assets" data-label="NOLA Assets">
+  <div class="accent-bar-left" style="background:var(--spons)"></div>
+  <div class="eyebrow eyebrow-spons">New Orleans — Sponsorship Asset Inventory</div>
+  <h2 class="section-title">What You're Selling. What It's Worth.</h2>
+  <div class="fade-in">
+  <table class="asset-table">
+    <thead><tr><th>Asset</th><th>Tier</th><th>Description</th><th>Est. Annual Value</th><th>Strategic Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Venue Naming Rights</td><td><span class="asset-tier tier-prem">Anchor</span></td><td>Full venue name — currently Caesars Superdome (expires ~2027). Massive brand impression across 183K+ events/year plus NFL, NCAA, Super Bowl exposure.</td><td class="asset-value">$4–6M/yr</td><td>Caesars deal expires 2027 — near-term re-competition. Regional energy and financial brands are natural successors.</td></tr>
+      <tr><td>Official Spirits Partner</td><td><span class="asset-tier tier-prem">Premium</span></td><td>Category-exclusive spirits pouring rights across all concessions and premium spaces. Can include branded bar concept (e.g. "Sazerac Bar at the Superdome").</td><td class="asset-value">$1.5–2.5M/yr</td><td>Sazerac Company is the obvious first call — culturally aligned, NOLA-native, strong premium portfolio.</td></tr>
+      <tr><td>Official Beer Partner</td><td><span class="asset-tier tier-prem">Premium</span></td><td>Category-exclusive beer pouring rights. Can include a dedicated branded tap room. Typically split domestic / craft tiers.</td><td class="asset-value">$800K–1.5M/yr</td><td>National brands vs. Abita regional play. Hybrid structure (national domestic + local craft) maximizes revenue.</td></tr>
+      <tr><td>Official Health System Partner</td><td><span class="asset-tier tier-mid2">Mid-Tier</span></td><td>Category exclusivity in health/wellness. Includes event-day health activation, first aid branding, community health messaging, and premium suite access.</td><td class="asset-value">$600K–1M/yr</td><td>Ochsner vs. LCMC competition. Ochsner has deeper pockets and broader community investment mandate.</td></tr>
+      <tr><td>Scoreboard / LED Signage</td><td><span class="asset-tier tier-mid2">Mid-Tier</span></td><td>Rotating in-bowl digital inventory across main videoboard, ribbon boards, and portal signage. Sold in category-exclusive packages.</td><td class="asset-value">$200–500K/yr per category</td><td>High-impression during NFL games and major events. Bundle with social/digital for premium packages.</td></tr>
+      <tr><td>Suite &amp; Club Hospitality</td><td><span class="asset-tier tier-prem">Premium</span></td><td>Corporate suite licenses, premium club membership, and event-specific hospitality buyouts. Primary B2B sales vehicle for corporate partners.</td><td class="asset-value">$50–250K per suite/yr</td><td>Key selling point for Entergy, Ochsner, Hancock Whitney, and local law/consulting firms.</td></tr>
+      <tr><td>Founding/Presenting Partnerships</td><td><span class="asset-tier tier-mid2">Mid-Tier</span></td><td>Title sponsorship of specific events (e.g. "Essence Festival Presented by Ochsner"). Category exclusivity for the event duration, branded premium areas, digital integration.</td><td class="asset-value">$250–750K/event</td><td>Particularly valuable for Essence Festival and Bayou Classic where brands align with culturally-specific audiences.</td></tr>
+      <tr><td>Concourse F&amp;B Integration</td><td><span class="asset-tier tier-base">Base</span></td><td>Branded QSR partnerships, named food concepts (e.g. "Raising Cane's" standalone kiosk). Lower-cost entry point with high foot traffic.</td><td class="asset-value">$100–300K/yr</td><td>Raising Cane's, Popeyes, Community Coffee are the first calls. These brands activate in their hometown venue — authenticity is free.</td></tr>
+    </tbody>
+  </table>
+  <div class="asset-callout">Total estimated annual sponsorship revenue potential at Caesars Superdome: <strong>$12–18M/year</strong> across all categories at full activation. Current estimated revenue is likely $8–10M. The gap represents whitespace, especially in the spirits, QSR, and emerging tech categories.</div>
+  </div>
+</section>
+
+<section class="slide slide-light" id="slide-nola-comp" data-label="NOLA Comp Set">
+  <div class="eyebrow eyebrow-spons">New Orleans — Current Sponsor Comp Set</div>
+  <h2 class="section-title">Who's Already in the Building. Where the Gaps Are.</h2>
+  <div class="comp-grid fade-in">
+    <div class="comp-card"><div class="comp-venue">Caesars Superdome · Naming Rights</div><div class="comp-sponsor">Caesars Entertainment</div><span class="comp-category comp-retail">Hospitality / Gaming</span><div class="comp-notes">Current naming rights holder since 2021. Multi-year deal valued at approximately $138M. Contract renewal window opens around 2027. Caesars has significant brand investment in the region.</div><div class="comp-insight">Gap: <span>Gaming/casino category is locked. Energy, healthcare, and financial services categories remain open at naming tier.</span></div></div>
+    <div class="comp-card"><div class="comp-venue">Smoothie King Center (Pelicans Arena)</div><div class="comp-sponsor">Smoothie King</div><span class="comp-category comp-health">QSR / Health</span><div class="comp-notes">NOLA-founded brand activating at the Pelicans arena. Shows the appetite for hometown brand naming plays in the market.</div><div class="comp-insight">Opportunity: <span>Smoothie King can't hold both arenas. Category competition between the two venues is a selling point for the Superdome's scale advantage.</span></div></div>
+    <div class="comp-card"><div class="comp-venue">Superdome / Saints Ecosystem</div><div class="comp-sponsor">Entergy New Orleans</div><span class="comp-category comp-fin">Energy</span><div class="comp-notes">Entergy is active in the Saints community investment ecosystem. The energy category at the venue itself is a growth opportunity — they should be the anchor sponsor.</div><div class="comp-insight">Opportunity: <span>Formalize Entergy as Official Energy Partner with full category exclusivity and branded activation — current presence is under-leveraged.</span></div></div>
+    <div class="comp-card"><div class="comp-venue">Superdome / Saints Ecosystem</div><div class="comp-sponsor">Hancock Whitney</div><span class="comp-category comp-fin">Banking</span><div class="comp-notes">Official bank of the New Orleans Saints with significant Saints-linked activation. Suite and club membership sales are a natural extension of this relationship to the Superdome proper.</div><div class="comp-insight">Gap: <span>Banking category activation inside the Superdome is underbuilt relative to their Saints commitment. ATM, payment, and B2B hospitality integration are whitespace.</span></div></div>
+    <div class="comp-card"><div class="comp-venue">Competitive Market Intelligence</div><div class="comp-sponsor">Mercedes-Benz Superdome (prev.)</div><span class="comp-category comp-auto">Auto</span><div class="comp-notes">Before Caesars, the venue was Mercedes-Benz Superdome (2011–2021). The auto category has been inactive since. This is category whitespace — no current official auto partner at naming or mid-tier level.</div><div class="comp-insight">Opportunity: <span>Auto category is wide open. Domestic (Chevrolet, Ford) and luxury (Mercedes, BMW, Cadillac) brands both have regional activation motivation.</span></div></div>
+    <div class="comp-card"><div class="comp-venue">NOLA Cultural Event Ecosystem</div><div class="comp-sponsor">Essence Festival Sponsors</div><span class="comp-category comp-retail">CPG / Beauty / Lifestyle</span><div class="comp-notes">Essence Festival brings in Coca-Cola, McDonald's, Toyota, and Black-owned brand activations. Many are not officially activated at the Superdome outside of Essence — cross-selling opportunity exists.</div><div class="comp-insight">Opportunity: <span>Convert Essence Festival brand spend into year-round Superdome partnerships — especially for CPG and beauty brands reaching the Black female demographic.</span></div></div>
+  </div>
+</section>
+
+<!-- CHAPTER 3: MPLS HOSPITALITY -->
+<div class="chapter-divider chapter-divider-mpls-hosp" id="ch-mpls-hosp" data-ch-start="mpls-hosp">
+  <div class="chapter-track">Chapter Three · Minneapolis</div>
+  <div class="chapter-divider-title">Hospitality &amp;<br>F&amp;B Strategy</div>
+  <div class="chapter-divider-sub">US Bank Stadium — The headquarters economy, affluent audience, event programming, and how to win the concession contract.</div>
+  <div class="chapter-number">03</div>
+</div>
+
+<section class="slide slide-light" id="slide-mpls-market" data-label="MPLS Market">
+  <div class="accent-bar-left" style="background:var(--mpls)"></div>
   <div class="eyebrow eyebrow-mpls">Minneapolis Market</div>
   <h2 class="section-title">The Headquarters Economy</h2>
   <div class="market-layout fade-in">
@@ -860,19 +854,19 @@ p.caption { font-size: 12px; color: var(--muted); margin-top: 0.3rem; }
       </div>
       <div class="market-section">
         <div class="market-section-label" style="color:var(--mpls)">The census validates the ticketing data</div>
-        <p>Unlike New Orleans, where buyer income skews far above a lower-income metro, Minneapolis' $98K metro median is itself elevated — 20% above the national average. Buyer affluence here is real, not just upward self-selection from a constrained economy. The premium ceiling at US Bank is structurally supported.</p>
+        <p>Minneapolis' $98K metro median is itself elevated — 20% above the national average. Buyer affluence here is real, not just upward self-selection from a constrained economy. The premium ceiling at US Bank is structurally supported.</p>
       </div>
       <div class="market-section">
         <div class="market-section-label" style="color:var(--mpls)">The diversity nuance</div>
-        <p>The city of Minneapolis is approximately 60% White, with growing Somali, Hmong, Black, and Latino communities. Yet the buyer pool is 92% White among identified buyers. The diverse communities of Minneapolis are nearly absent from current attendance — a long-term growth opportunity that a forward-looking operator should acknowledge in their bid.</p>
+        <p>The city of Minneapolis is approximately 60% White, with growing Somali, Hmong, Black, and Latino communities. Yet the buyer pool is 92% White. The diverse communities of Minneapolis are nearly absent — a long-term growth opportunity that a forward-looking operator should acknowledge.</p>
       </div>
       <div class="market-section">
         <div class="market-section-label" style="color:var(--mpls)">Homeownership and rootedness</div>
-        <p>The metro homeownership rate is 70.7%, well above the national average of 65.2%. Median home value hit $374K in 2024 — up 5.5% year over year. This is a stable, settled, equity-rich population with deep loyalty to their venue and high repeat-attendance rates.</p>
+        <p>Metro homeownership is 70.7%, well above the national average of 65.2%. Median home value hit $374K in 2024, up 5.5% year over year. This is a stable, settled, equity-rich population with deep venue loyalty and high repeat-attendance rates.</p>
       </div>
     </div>
     <div class="market-stats">
-      <div class="mstat" style="--nola:var(--mpls)"><div class="mstat-val" style="color:var(--mpls)">$98K</div><div class="mstat-label">Metro median HH income</div><div class="mstat-source">ACS 2024 · 20% above U.S. avg</div></div>
+      <div class="mstat"><div class="mstat-val" style="color:var(--mpls)">$98K</div><div class="mstat-label">Metro median HH income</div><div class="mstat-source">ACS 2024 · 20% above U.S. avg</div></div>
       <div class="mstat"><div class="mstat-val" style="color:var(--mpls)">8.3%</div><div class="mstat-label">Metro poverty rate</div><div class="mstat-source">ACS 2024 · U.S. avg 12.2%</div></div>
       <div class="mstat"><div class="mstat-val" style="color:var(--mpls)">17</div><div class="mstat-label">Fortune 500 HQs (2025)</div><div class="mstat-source">Highest per capita globally</div></div>
       <div class="mstat"><div class="mstat-val" style="color:var(--mpls)">#1</div><div class="mstat-label">Fortune 500 concentration</div><div class="mstat-source">Per capita, worldwide</div></div>
@@ -882,93 +876,157 @@ p.caption { font-size: 12px; color: var(--muted); margin-top: 0.3rem; }
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════
-     SLIDE 7 — MPLS EVENT MIX
-════════════════════════════════════════════════════ -->
-<section class="slide slide-cream" id="slide-7" data-label="MPLS Events">
+<section class="slide slide-cream" id="slide-mpls-events" data-label="MPLS Events">
   <div class="eyebrow eyebrow-mpls">Minneapolis — Event Mix</div>
   <h2 class="section-title">A Concert Calendar That Reveals Its Audience</h2>
   <p style="font-size:14px;color:var(--muted);margin-bottom:0.5rem;font-weight:300;max-width:750px">Morgan Wallen, Chris Stapleton, AC/DC, Metallica, Paul McCartney — the top events are not demographic accidents. They are a direct window into the affluent suburban majority driving this building's economics.</p>
   <div class="event-grid fade-in">
-    <div class="event-card tier-am">
-      <div class="event-header"><span class="event-name">Morgan Wallen</span><span class="event-buyers" style="color:var(--mpls)">20,879 buyers</span></div>
-      <div class="event-desc">Country audience, older demographic, high-income suburban. Strongest alignment with Summit Estates and Established Elite Personicx segments. This is the core US Bank demographic at peak density.</div>
-    </div>
-    <div class="event-card tier-am">
-      <div class="event-header"><span class="event-name">Chris Stapleton</span><span class="event-buyers" style="color:var(--mpls)">13,025 buyers</span></div>
-      <div class="event-desc">Serious music fan, educated, affluent. Appreciates quality in all things. Premium food and drink per-cap is among the highest for any event type at US Bank.</div>
-    </div>
-    <div class="event-card tier-am">
-      <div class="event-header"><span class="event-name">AC/DC / Metallica</span><span class="event-buyers" style="color:var(--mpls)">11,838 / 9,046+</span></div>
-      <div class="event-desc">Classic rock, 45–65 demographic, high disposable income. The Comfortable Empty Nester persona at peak density. Wine, premium beer, quality food — not gimmicks.</div>
-    </div>
-    <div class="event-card tier-bm">
-      <div class="event-header"><span class="event-name">Monster Jam</span><span class="event-buyers">20,914 buyers</span></div>
-      <div class="event-desc">Families with young children — the highest buyer-volume event at US Bank. Budget-conscious; value tier and kids' program are not optional. Don't let the venue's affluence blind you to this crowd.</div>
-    </div>
-    <div class="event-card tier-cm">
-      <div class="event-header"><span class="event-name">Kendrick Lamar & SZA</span><span class="event-buyers" style="color:var(--nola)">13,617 buyers</span></div>
-      <div class="event-desc">Younger, more diverse audience than the country/rock events. Hip-hop demographic demands different F&B programming — fast-casual, bold flavors, different price anchors.</div>
-    </div>
-    <div class="event-card tier-bm">
-      <div class="event-header"><span class="event-name">MSHSL Football / Soccer</span><span class="event-buyers">12,000+ buyers</span></div>
-      <div class="event-desc">High school athletics — community families from across Minnesota. Broad income range; value pricing and local Minnesota pride are the key drivers.</div>
-    </div>
+    <div class="event-card tier-am"><div class="event-header"><span class="event-name">Morgan Wallen</span><span class="event-buyers" style="color:var(--mpls)">20,879 buyers</span></div><div class="event-desc">Country audience, older demographic, high-income suburban. Strongest alignment with Summit Estates and Established Elite Personicx segments. Core US Bank demographic at peak density.</div></div>
+    <div class="event-card tier-am"><div class="event-header"><span class="event-name">Chris Stapleton</span><span class="event-buyers" style="color:var(--mpls)">13,025 buyers</span></div><div class="event-desc">Serious music fan, educated, affluent. Appreciates quality in all things. Premium food and drink per-cap is among the highest for any event type at US Bank.</div></div>
+    <div class="event-card tier-am"><div class="event-header"><span class="event-name">AC/DC / Metallica</span><span class="event-buyers" style="color:var(--mpls)">11,838 / 9,046+</span></div><div class="event-desc">Classic rock, 45–65 demographic, high disposable income. The Comfortable Empty Nester persona at peak density. Wine, premium beer, quality food — not gimmicks.</div></div>
+    <div class="event-card tier-bm"><div class="event-header"><span class="event-name">Monster Jam</span><span class="event-buyers">20,914 buyers</span></div><div class="event-desc">Families with young children — highest buyer-volume event at US Bank. Budget-conscious; value tier and kids' program are not optional. Don't let the venue's affluence blind you to this crowd.</div></div>
+    <div class="event-card tier-cm"><div class="event-header"><span class="event-name">Kendrick Lamar &amp; SZA</span><span class="event-buyers" style="color:var(--nola)">13,617 buyers</span></div><div class="event-desc">Younger, more diverse audience. Hip-hop demographic demands different F&amp;B programming — fast-casual, bold flavors, different price anchors.</div></div>
+    <div class="event-card tier-bm"><div class="event-header"><span class="event-name">MSHSL Football / Soccer</span><span class="event-buyers">12,000+ buyers</span></div><div class="event-desc">High school athletics — community families from across Minnesota. Broad income range; value pricing and local Minnesota pride are the key drivers.</div></div>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════
-     SLIDE 8 — DATA TENSIONS
-════════════════════════════════════════════════════ -->
-<section class="slide slide-light" id="slide-8" data-label="Data Gaps">
+<!-- CHAPTER 4: MPLS SPONSORSHIP -->
+<div class="chapter-divider chapter-divider-mpls-spons" id="ch-mpls-spons" data-ch-start="mpls-spons">
+  <div class="chapter-track">Chapter Four · Minneapolis</div>
+  <div class="chapter-divider-title">Sponsorship Sales<br>Strategy</div>
+  <div class="chapter-divider-sub">US Bank Stadium — The densest Fortune 500 market per capita on earth. Every major company HQ'd here is a sponsorship target. Here's the playbook.</div>
+  <div class="chapter-number">04</div>
+</div>
+
+<section class="slide slide-spons" id="slide-mpls-corps" data-label="MPLS Corporate">
+  <div class="accent-bar-left" style="background:var(--mpls)"></div>
+  <div class="eyebrow eyebrow-spons">Minneapolis — Fortune 500 Corporate Landscape</div>
+  <h2 class="section-title">17 Fortune 500s. All Within 20 Minutes of the Stadium.</h2>
+  <p style="font-size:14px;color:var(--muted);max-width:760px;font-weight:300;line-height:1.7;margin-bottom:1.5rem">No large metro on earth has a higher concentration of Fortune 500 headquarters per capita. These aren't just potential sponsors — they are the primary users of US Bank Stadium's premium hospitality. Their employees, clients, and leadership teams ARE the audience.</p>
+  <div class="corp-landscape-grid fade-in">
+    <div class="corp-card"><div class="corp-card-header"><div><div class="corp-name">UnitedHealth Group</div><div class="corp-industry">Healthcare / Insurance</div></div><span class="corp-rank rank-f500">Fortune 500 · #5</span></div><div class="corp-desc">America's largest health insurer by revenue ($368B+). Minnetonka HQ. 140,000+ employees globally, ~11,000 in Twin Cities. One of the most valuable B2B hospitality clients in the entire midwest.</div><div class="corp-spons-fit">Sponsorship fit: <span>Official health partner, premium suite portfolio, employee/client entertainment hospitality packages. Highest-value single sponsor target in the market.</span></div></div>
+    <div class="corp-card"><div class="corp-card-header"><div><div class="corp-name">Target Corporation</div><div class="corp-industry">Retail</div></div><span class="corp-rank rank-f500">Fortune 500 · ~#30</span></div><div class="corp-desc">Minneapolis-born retail giant, ~$109B in revenue. Downtown Minneapolis HQ employs 10,000+. Already the naming rights holder for Target Center (Timberwolves/Lynx). Extremely active in Minnesota sports sponsorship landscape.</div><div class="corp-spons-fit">Sponsorship fit: <span>Retail category, branded activation spaces, Target Circle loyalty integration, cross-venue coordination with Target Center. Premium B2B suite packages.</span></div></div>
+    <div class="corp-card"><div class="corp-card-header"><div><div class="corp-name">U.S. Bancorp (US Bank)</div><div class="corp-industry">Banking / Financial Services</div></div><span class="corp-rank rank-f500">Fortune 500 · ~#140</span></div><div class="corp-desc">The naming rights holder at $220M over 25 years (through 2040). Minneapolis HQ, $25B+ revenue, 70,000 employees. The most committed single corporate partner at the venue — the relationship goes well beyond the naming deal.</div><div class="corp-spons-fit">Sponsorship fit: <span>Banking category lock through 2040. Deepen the relationship with premium hospitality upgrades, branded payment integration, and loyalty program tie-in.</span></div></div>
+    <div class="corp-card"><div class="corp-card-header"><div><div class="corp-name">General Mills</div><div class="corp-industry">Food / CPG</div></div><span class="corp-rank rank-f500">Fortune 500 · ~#165</span></div><div class="corp-desc">Golden Valley HQ. Cheerios, Pillsbury, Nature Valley, Häagen-Dazs, Betty Crocker. $19B+ revenue. Enormous Minnesota cultural identity. Brand activation in F&amp;B concourse is highly natural.</div><div class="corp-spons-fit">Sponsorship fit: <span>CPG/food category, branded concourse food concepts, fan experience activations. Nature Valley bar in outdoor settings, Pillsbury baking concept in premium.</span></div></div>
+    <div class="corp-card"><div class="corp-card-header"><div><div class="corp-name">Best Buy</div><div class="corp-industry">Consumer Electronics / Retail</div></div><span class="corp-rank rank-f500">Fortune 500 · ~#75</span></div><div class="corp-desc">Richfield HQ. $43B+ revenue. Strong Minnesota community identity, active sponsor across Minnesota sports. Tech/electronics category at the venue is relatively underdeveloped despite their size and proximity.</div><div class="corp-spons-fit">Sponsorship fit: <span>Tech/electronics category, premium A/V installation branding, smart stadium integration. Natural anchor for digital/connected experience category.</span></div></div>
+    <div class="corp-card"><div class="corp-card-header"><div><div class="corp-name">3M / Solventum</div><div class="corp-industry">Industrial / Healthcare Tech</div></div><span class="corp-rank rank-f500">Fortune 500 · 3M ~#95 · Solventum #462</span></div><div class="corp-desc">Maplewood HQ. 3M is a $33B global industrial giant. Solventum ($8.2B) is their healthcare tech spinoff, debuting on Fortune 500 in 2025. Both are active B2B clients in the premium stadium space.</div><div class="corp-spons-fit">Sponsorship fit: <span>B2B suite and club hospitality packages, innovation/technology activation spaces. Less of a brand visibility play, more of a client entertainment relationship.</span></div></div>
+    <div class="corp-card"><div class="corp-card-header"><div><div class="corp-name">Ameriprise Financial</div><div class="corp-industry">Financial Services / Wealth Mgmt</div></div><span class="corp-rank rank-f500">Fortune 500 · ~#260</span></div><div class="corp-desc">Minneapolis HQ. $15B+ revenue, 10,000 financial advisors nationwide. Their target client — affluent households — is literally the US Bank Stadium audience. Strong motivation to activate at premium events.</div><div class="corp-spons-fit">Sponsorship fit: <span>Financial advisory category, premium club branding, client entertainment suites, advisor recruitment events. Perfect demographic alignment with the Summit Spender persona.</span></div></div>
+    <div class="corp-card"><div class="corp-card-header"><div><div class="corp-name">Cargill</div><div class="corp-industry">Agriculture / Food / Commodities</div></div><span class="corp-rank rank-private">Private · Wayzata HQ · ~$160B rev</span></div><div class="corp-desc">The largest private company in America by revenue (~$160B). Headquartered in Wayzata, 15 min from the stadium. Does not appear on Fortune 500 (private). Extremely active in B2B hospitality.</div><div class="corp-spons-fit">Sponsorship fit: <span>Premium suite packages, VIP hospitality for client and supplier relationships. Not a naming/signage play — this is pure B2B hospitality revenue.</span></div></div>
+    <div class="corp-card"><div class="corp-card-header"><div><div class="corp-name">Ecolab</div><div class="corp-industry">Water / Hygiene / Energy Tech</div></div><span class="corp-rank rank-f500">Fortune 500 · ~#235</span></div><div class="corp-desc">St. Paul HQ. $15B+ revenue, global hygiene and food safety solutions leader. Massive B2B focus, but growing consumer-facing awareness post-pandemic. Deep Minnesota roots with strong sustainability narrative.</div><div class="corp-spons-fit">Sponsorship fit: <span>Sustainability activation, "clean stadium" sponsorship, water program. Unique category angle — an "official hygiene/sustainability partner" is differentiated and increasingly valued.</span></div></div>
+    <div class="corp-card"><div class="corp-card-header"><div><div class="corp-name">Land O'Lakes</div><div class="corp-industry">Agriculture / Dairy / CPG</div></div><span class="corp-rank rank-private">Cooperative · Arden Hills · ~$15B</span></div><div class="corp-desc">Iconic Minnesota cooperative. Strong Minnesota community identity — "farmer-owned" narrative resonates deeply in the state. Active in community sponsorships across MN.</div><div class="corp-spons-fit">Sponsorship fit: <span>Dairy/food CPG category, suite hospitality, Minnesota pride activation. Natural fit for premium suite catering partnerships — Land O'Lakes butter in the kitchen is a storytelling moment.</span></div></div>
+  </div>
+</section>
+
+<section class="slide slide-light" id="slide-mpls-cats" data-label="MPLS Targets">
+  <div class="eyebrow eyebrow-spons">Minneapolis — Sponsor Category Targets</div>
+  <h2 class="section-title">The Most Valuable Corporate Sponsorship Market in the Midwest.</h2>
+  <p style="font-size:14px;color:var(--muted);max-width:700px;font-weight:300;line-height:1.7;margin-bottom:0.5rem">Minneapolis' sponsorship strategy leads with the Fortune 500 corporate infrastructure. Every category has a homegrown blue-chip anchor. The question isn't who to call — it's how to structure the deals and which categories to prioritize for renewal vs. new activation.</p>
+  <div class="cat-grid fade-in">
+    <div class="cat-card priority-high"><div class="cat-priority">Priority High</div><div class="cat-name">Banking / Finance</div><div class="cat-targets">US Bank (naming, locked 2040), Ameriprise, Wells Fargo MN, Bremer Bank, Allianz</div><div class="cat-rationale">US Bank naming rights = the anchor relationship. Build a deeper financial services portfolio around it — Ameriprise for wealth management, regional banks for community presence.</div></div>
+    <div class="cat-card priority-high"><div class="cat-priority">Priority High</div><div class="cat-name">Healthcare / Insurance</div><div class="cat-targets">UnitedHealth Group, Allina Health, Fairview Health, HealthPartners, Medtronic</div><div class="cat-rationale">UHG alone is a top-5 Fortune 500 in your backyard. The healthcare density in MSP is extraordinary. Official health partner + suite portfolio = the highest-value non-naming deal possible.</div></div>
+    <div class="cat-card priority-high"><div class="cat-priority">Priority High</div><div class="cat-name">Retail / CPG</div><div class="cat-targets">Target, General Mills, Land O'Lakes, Hormel, Polaris</div><div class="cat-rationale">Target naming Target Center creates a portfolio opportunity for US Bank Stadium. General Mills' concourse food integration is a natural — their brands are on every shelf in the stadium audience's home.</div></div>
+    <div class="cat-card priority-mid"><div class="cat-priority">Mid-Tier</div><div class="cat-name">Technology</div><div class="cat-targets">Best Buy, CrowdStrike (MN HQ), Digi International, Digital River</div><div class="cat-rationale">Best Buy is the obvious anchor — consumer electronics category, strong Minnesota identity. Tech category at US Bank is underdeveloped relative to the corporate base. Smart stadium and connected experience angles are the pitch.</div></div>
+    <div class="cat-card priority-mid"><div class="cat-priority">Mid-Tier</div><div class="cat-name">Beer &amp; Spirits</div><div class="cat-targets">Surly Brewing (MN local), Summit Brewing, Indeed Brewing, Tattersall Distilling, Tito's</div><div class="cat-rationale">MPLS has a serious craft beer culture. Surly, Summit, and Indeed are civic-pride brands the audience knows and respects. Premium spirits: local distilleries + national bourbon/whiskey brands for the country-music crowd.</div></div>
+    <div class="cat-card priority-mid"><div class="cat-priority">Mid-Tier</div><div class="cat-name">Auto</div><div class="cat-targets">Ford (F-Series #1 in MN), Chevrolet, Ram/Stellantis, Toyota, Polaris</div><div class="cat-rationale">Truck brands dominate in Minnesota. Ford F-Series, Ram, and Chevy Silverado are the top-selling vehicles in the state. Strong fit with country music/outdoor/family event audience. Auto is underactivated at US Bank.</div></div>
+    <div class="cat-card priority-grow"><div class="cat-priority">Growth Opportunity</div><div class="cat-name">Agriculture / Energy</div><div class="cat-targets">Cargill, CHS Cooperative, Xcel Energy, NextEra (MN operations), Mosaic</div><div class="cat-rationale">Cargill and CHS are two of the largest private companies in America, both MN-based. Energy sponsor (Xcel) is a natural sustainability/community angle. These are massive B2B hospitality buyers even without consumer-facing activation.</div></div>
+    <div class="cat-card priority-grow"><div class="cat-priority">Growth Opportunity</div><div class="cat-name">Airlines / Travel</div><div class="cat-targets">Delta Air Lines (MSP hub), Sun Country Airlines (MSP HQ), United, American</div><div class="cat-rationale">MSP is Delta's second-largest hub. Sun Country is headquartered in Minneapolis. Travel category sponsorship with premium club branding and lounge connection is underdeveloped at US Bank.</div></div>
+    <div class="cat-card priority-grow"><div class="cat-priority">Growth Opportunity</div><div class="cat-name">QSR / Food Service</div><div class="cat-targets">Caribou Coffee (MN HQ), Dairy Queen (Edina HQ), Jimmy John's, Raising Cane's</div><div class="cat-rationale">Caribou Coffee and Dairy Queen are both Minnesota-headquartered. Caribou especially resonates with the professional/suburban audience. Coffee category sponsorship is a premium play.</div></div>
+  </div>
+</section>
+
+<section class="slide slide-spons" id="slide-mpls-assets" data-label="MPLS Assets">
+  <div class="accent-bar-left" style="background:var(--mpls)"></div>
+  <div class="eyebrow eyebrow-spons">Minneapolis — Sponsorship Asset Inventory</div>
+  <h2 class="section-title">Premium Assets. Premium Market. Premium Pricing.</h2>
+  <div class="fade-in">
+  <table class="asset-table">
+    <thead><tr><th>Asset</th><th>Tier</th><th>Description</th><th>Est. Annual Value</th><th>Strategic Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Venue Naming Rights</td><td><span class="asset-tier tier-prem">Anchor</span></td><td>US Bank naming rights through 2040 (~$220M deal). Most stable naming deal in the NFL — long-term visibility and partnership depth opportunity.</td><td class="asset-value">~$8.8M/yr (existing)</td><td>Deepen the US Bank relationship — branded payment zones, loyalty integration, employee/client experience upgrades. The deal is signed; the activation gap is the opportunity.</td></tr>
+      <tr><td>Official Health System Partner</td><td><span class="asset-tier tier-prem">Premium</span></td><td>Category exclusivity in healthcare/insurance. Primary target: UnitedHealth Group. Suite portfolio, event-day health activation, community wellness program.</td><td class="asset-value">$3–5M/yr</td><td>UHG is the #5 Fortune 500. This category, properly activated, should be the highest-value non-naming deal in the building by a wide margin.</td></tr>
+      <tr><td>Official Tech Partner</td><td><span class="asset-tier tier-prem">Premium</span></td><td>Technology category exclusivity — smart stadium, connected experience, A/V systems branding. Target: Best Buy as consumer tech anchor + enterprise tech sublayer.</td><td class="asset-value">$2–3M/yr</td><td>Best Buy has the brand, the HQ proximity, and the category fit. A "Best Buy Connected Stadium" concept would differentiate US Bank against every other NFL venue.</td></tr>
+      <tr><td>Official Retail Category Partner</td><td><span class="asset-tier tier-prem">Premium</span></td><td>Retail category integration — Target is the most natural fit, already invested in Minnesota sports through Target Center. Cross-venue coordination opportunity.</td><td class="asset-value">$1.5–2.5M/yr</td><td>Target's "Target Circle" loyalty program could be integrated with ticketing and premium access — a fan experience and data-sharing play.</td></tr>
+      <tr><td>Official Beer Partner</td><td><span class="asset-tier tier-mid2">Mid-Tier</span></td><td>Category-exclusive beer pouring rights. Dual-track: national domestic (AB InBev/Molson Coors) + Minnesota craft (Surly, Summit). Craft tier especially valued by the country/rock audience.</td><td class="asset-value">$1–2M/yr</td><td>Surly Brewing was specifically designed to be the "stadium brewery" — their Furious IPA and Hell lager have mass appeal. The Minnesota craft narrative is a selling point in itself.</td></tr>
+      <tr><td>Club &amp; Suite Hospitality Portfolio</td><td><span class="asset-tier tier-prem">Premium</span></td><td>150+ suites and multiple premium club levels. Fortune 500 corporate clients are the primary buyers. Seasonal suite licenses, single-event packages, and hospitality buyouts.</td><td class="asset-value">$75–400K per suite/yr</td><td>The Fortune 500 HQ density means the suite buyer pool is uniquely deep. B2B hospitality packages targeting corporate entertainment use cases should dominate the pitch approach.</td></tr>
+      <tr><td>CPG / Food Brand Concourse Integration</td><td><span class="asset-tier tier-mid2">Mid-Tier</span></td><td>Named food concept sponsorships — branded General Mills kiosk, Caribou Coffee destination bar, Dairy Queen dessert station. Named for Minnesota brands that the audience recognizes.</td><td class="asset-value">$300–700K/yr per concept</td><td>This is where F&amp;B and sponsorship converge. A "General Mills Kitchen" in the premium concourse is both a sponsorship asset and a hospitality differentiator — price it accordingly.</td></tr>
+      <tr><td>Scoreboard / Digital Inventory</td><td><span class="asset-tier tier-mid2">Mid-Tier</span></td><td>US Bank Stadium's ETFE roof structure and premium LED canopy are among the most premium digital canvas in the NFL. Rotating in-bowl + exterior signage packages.</td><td class="asset-value">$400K–1M/yr per category</td><td>The glass ETFE roof creates a unique visual backdrop for exterior projection activations. Premium markets support premium pricing — above-average CPM vs. comparable NFL venues.</td></tr>
+    </tbody>
+  </table>
+  <div class="asset-callout">Total estimated annual sponsorship revenue potential at US Bank Stadium: <strong>$35–50M/year</strong> at full activation across all categories, consistent with top-tier NFL venue benchmarks. The Fortune 500 corporate infrastructure supports premium pricing at every tier — the opportunity gap is primarily in the tech and CPG activation categories.</div>
+  </div>
+</section>
+
+<section class="slide slide-light" id="slide-mpls-comp" data-label="MPLS Comp Set">
+  <div class="eyebrow eyebrow-spons">Minneapolis — Current Sponsor Comp Set</div>
+  <h2 class="section-title">Who's in the Building. The Gaps That Need Filling.</h2>
+  <div class="comp-grid fade-in">
+    <div class="comp-card"><div class="comp-venue">US Bank Stadium · Naming Rights</div><div class="comp-sponsor">U.S. Bancorp (US Bank)</div><span class="comp-category comp-fin">Banking — Locked through 2040</span><div class="comp-notes">$220M naming deal through 2040. Deepest and most committed corporate partnership in MN sports. The challenge isn't replacing it — it's maximizing the relationship through broader activation, hospitality upgrades, and data integration.</div><div class="comp-insight">Strategy: <span>Move US Bank from naming-rights vendor to true founding partner with hospitality activation, loyalty integration, and thought leadership positioning inside the building.</span></div></div>
+    <div class="comp-card"><div class="comp-venue">US Bank Stadium / Vikings</div><div class="comp-sponsor">Delta Air Lines</div><span class="comp-category comp-auto">Airlines / Travel</span><div class="comp-notes">Delta has active partnerships across Minnesota sports. MSP is their second-largest hub. Underrepresented at the venue itself relative to their MSP market commitment.</div><div class="comp-insight">Opportunity: <span>Travel category has room for both Delta and Sun Country (local HQ) — a domestic + regional play that tells a Minnesota aviation story.</span></div></div>
+    <div class="comp-card"><div class="comp-venue">Target Center (Cross-Market)</div><div class="comp-sponsor">Target Corporation</div><span class="comp-category comp-retail">Retail — Timberwolves/Lynx</span><div class="comp-notes">Target is committed to Minnesota sports via Target Center. They are NOT currently named at US Bank Stadium — a significant gap given their HQ proximity, community investment, and audience-brand fit.</div><div class="comp-insight">Gap: <span>Target is the obvious second major naming play — or a founding retail partner at the concourse level. Cross-venue conversation with the Vikings is essential.</span></div></div>
+    <div class="comp-card"><div class="comp-venue">US Bank Stadium / Vikings</div><div class="comp-sponsor">Mystic Lake Casino</div><span class="comp-category comp-retail">Gaming / Entertainment</span><div class="comp-notes">Minnesota's largest casino is an active NFL sponsor. The gaming category activation points to the strong sports betting and gaming interest in this audience — a category that is rapidly expanding.</div><div class="comp-insight">Gap: <span>Sports betting category (DraftKings, FanDuel, BetMGM) is growing rapidly across NFL venues. Minnesota legalization momentum makes this a near-term category to build.</span></div></div>
+    <div class="comp-card"><div class="comp-venue">Competitive Benchmark</div><div class="comp-sponsor">UnitedHealth Group — Not Yet Active</div><span class="comp-category comp-health">Healthcare — Whitespace</span><div class="comp-notes">UHG (#5 Fortune 500, $368B revenue, ~11,000 Twin Cities employees) has NO current naming or major activation at US Bank Stadium. This is the single largest sponsorship gap in the building relative to the corporate market.</div><div class="comp-insight">Priority #1: <span>UnitedHealth Group should be the first call for the Official Health Partner category — the deal size, brand alignment, and audience fit are all exceptional.</span></div></div>
+    <div class="comp-card"><div class="comp-venue">Competitive Benchmark</div><div class="comp-sponsor">Best Buy — Not Yet Active at Scale</div><span class="comp-category comp-tech">Technology — Whitespace</span><div class="comp-notes">Best Buy ($43B revenue, Richfield HQ, deeply MN-identified) has minimal activation at US Bank relative to their market position. The "connected stadium" tech category is effectively open.</div><div class="comp-insight">Priority #2: <span>Best Buy as Official Tech Partner is the clearest unactivated whitespace in the building. The pitch: "Best Buy powers the fan experience" — AV, digital, connected stadium.</span></div></div>
+  </div>
+</section>
+
+<!-- CHAPTER 5: DATA ANALYSIS -->
+<div class="chapter-divider" style="background:#1F3864" id="ch-data" data-ch-start="data">
+  <div class="chapter-track">Chapter Five</div>
+  <div class="chapter-divider-title">Data &amp; Market<br>Analysis</div>
+  <div class="chapter-divider-sub">Where ticketing data and census data diverge — and what that means strategically for both hospitality and sponsorship.</div>
+  <div class="chapter-number">05</div>
+</div>
+
+<section class="slide slide-light" id="slide-data-gaps" data-label="Data Gaps">
   <div class="eyebrow eyebrow-muted">Data Methodology</div>
   <h2 class="section-title">Where Ticketing Data and Census Data Diverge</h2>
   <div class="tension-intro">Ticket buyers are a self-selected, upwardly mobile slice of each metro area. The gap between the buyer sample and the actual population reveals both current selection bias and untapped market potential.</div>
   <div class="fade-in">
   <table class="tension-table">
-    <thead>
-      <tr>
-        <th>Dimension</th>
-        <th>Ticketing data says</th>
-        <th>Census says</th>
-        <th>Strategic implication</th>
-      </tr>
-    </thead>
+    <thead><tr><th>Dimension</th><th>Ticketing data says</th><th>Census says</th><th>Strategic implication</th></tr></thead>
     <tbody>
-      <tr><td>Income (NOLA)</td><td>Acxiom median ~$87K. Strong $50–$149K middle tier.</td><td>Metro median $62K. City median $57K. Poverty rate 18%.</td><td>Price for the market, not just the buyer. Don't calibrate to your sample.</td></tr>
-      <tr><td>Race (NOLA)</td><td>36% Black buyers of identified records.</td><td>City is 55% Black. Cultural majority of the market.</td><td>Cultural majority underrepresented. Events like Essence Festival are correction mechanisms — they need event-specific investment.</td></tr>
-      <tr><td>Income (MPLS)</td><td>Acxiom median ~$125K. 32% earn $200K+.</td><td>Metro median $98K — itself 20% above U.S. avg.</td><td>Gap is real but expected. The premium ceiling is structurally validated — not inflated by sample bias.</td></tr>
-      <tr><td>Race (MPLS)</td><td>92% White buyers of identified records.</td><td>City ~60% White, with growing Somali, Hmong, Black, Latino communities.</td><td>Diverse communities nearly absent. Long-term growth opportunity a forward-looking operator should name in their bid.</td></tr>
-      <tr><td>Education</td><td>35–41% college+ across both venues.</td><td>34–45% college+ by metro (strong alignment).</td><td>Education levels align well. No major strategic correction needed on this dimension.</td></tr>
-      <tr><td>Tourism (NOLA)</td><td>Not flagged in ticketing data.</td><td>19M visitors, $10.4B spend annually.</td><td>Tourist overlay amplifies the premium tier's revenue potential. A meaningful portion of attendees are spending on travel days — price accordingly.</td></tr>
+      <tr><td>Income (NOLA)</td><td>Acxiom median ~$87K. Strong $50–$149K middle tier.</td><td>Metro median $62K. City median $57K. Poverty rate 18%.</td><td>Price for the market, not just the buyer. Sponsorship should target brands that index for the real city, not the sample.</td></tr>
+      <tr><td>Race (NOLA)</td><td>36% Black buyers of identified records.</td><td>City is 55% Black. Cultural majority of the market.</td><td>Cultural majority underrepresented. Sponsors like Essence Festival CPG brands, Black-owned businesses, and community-focused financial brands fill this gap.</td></tr>
+      <tr><td>Income (MPLS)</td><td>Acxiom median ~$125K. 32% earn $200K+.</td><td>Metro median $98K — itself 20% above U.S. avg.</td><td>Premium ceiling is structurally validated. Sponsorship premium pricing is justified — this market actually has this money.</td></tr>
+      <tr><td>Race (MPLS)</td><td>92% White buyers of identified records.</td><td>City ~60% White, with growing Somali, Hmong, Black, Latino communities.</td><td>Diverse communities nearly absent. Forward-looking operators and sponsors should name this gap — it represents both social responsibility and long-term growth.</td></tr>
+      <tr><td>Education</td><td>35–41% college+ across both venues.</td><td>34–45% college+ by metro (strong alignment).</td><td>Education levels align well. Both venues can market effectively to college-educated sponsor decision-makers and audience members.</td></tr>
+      <tr><td>Tourism (NOLA)</td><td>Not flagged in ticketing data.</td><td>19M visitors, $10.4B spend annually.</td><td>Tourist overlay amplifies sponsorship value for travel, spirits, and CPG categories. Sponsors reach BOTH local and visitor audiences — a unique dual-market reach.</td></tr>
     </tbody>
   </table>
-  <div class="tension-callout">The most important methodological takeaway: Acxiom-enriched ticketing data is a reliable portrait of who is buying tickets. Census data is a reliable portrait of who lives in the market. The gap between those two pictures represents both current selection bias and the untapped audience a long-term operator should build toward.</div>
+  <div class="tension-callout">The most important cross-track insight: Acxiom buyer data tells you how to price the hospitality program. Census data tells you how to build the sponsorship story. The most compelling sponsorship pitch uses both — showing brands the actual market opportunity, not just the current buyer sample.</div>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════
-     SLIDE 9 — PERSONA OVERVIEW
-════════════════════════════════════════════════════ -->
-<section class="slide" id="slide-9" data-label="Personas" style="background:var(--navy-mid)">
+<!-- CHAPTER 6: PERSONAS -->
+<div class="chapter-divider" style="background:#2A3D66" id="ch-personas" data-ch-start="personas">
+  <div class="chapter-track">Chapter Six</div>
+  <div class="chapter-divider-title">Audience<br>Personas</div>
+  <div class="chapter-divider-sub">7 personas defined from 421,322 buyer records — built for both hospitality programming and sponsor audience targeting.</div>
+  <div class="chapter-number">06</div>
+</div>
+
+<section class="slide" id="slide-personas-overview" data-label="All Personas" style="background:#1F3864">
   <div class="eyebrow eyebrow-gold">Audience Personas</div>
   <h2 class="section-title" style="color:var(--off-white)">The 7 Audience Personas</h2>
   <p style="font-size:14px;color:var(--muted);margin-bottom:2rem;font-weight:300">Defined from 421,322 buyer records across age, income, family structure, lifestage, education, and Personicx segments. Click any persona to view the full profile.</p>
-  <div class="persona-overview-grid fade-in" id="personaGrid">
-    <!-- Populated by JS -->
-  </div>
+  <div class="persona-overview-grid fade-in" id="personaGrid"></div>
 </section>
 
-<!-- Persona Detail Slides 10–16 -->
 <div id="personaSlides"></div>
 
-<!-- ════════════════════════════════════════════════════
-     SLIDE 17 — BIDDER STRATEGY NOLA
-════════════════════════════════════════════════════ -->
-<section class="slide slide-light nola-strategy" id="slide-17" data-label="NOLA Bid">
+<!-- CHAPTER 7: STRATEGY -->
+<div class="chapter-divider chapter-divider-strategy" id="ch-strategy" data-ch-start="strategy">
+  <div class="chapter-track">Chapter Seven</div>
+  <div class="chapter-divider-title">Bid Strategy:<br>Do's &amp; Don'ts</div>
+  <div class="chapter-divider-sub">For each venue — what wins the hospitality contract and what wins the sponsorship conversation.</div>
+  <div class="chapter-number">07</div>
+</div>
+
+<!-- NOLA HOSPITALITY STRATEGY -->
+<section class="slide slide-light nola-strategy" id="slide-strat-nola-hosp" data-label="NOLA F&amp;B Bid">
   <div class="accent-bar-left" style="background:var(--nola)"></div>
-  <div class="eyebrow eyebrow-nola">Bidder Strategy</div>
-  <h2 class="section-title">Caesars Superdome: How to Win the Bid</h2>
+  <div class="eyebrow eyebrow-nola">Bidder Strategy · New Orleans · Hospitality</div>
+  <h2 class="section-title">Caesars Superdome: How to Win the F&amp;B Contract</h2>
   <div class="strategy-hero fade-in">
     <div class="strategy-hero-label">The one thing that matters most</div>
     <div class="strategy-hero-text">Cultural authenticity is the only thing that buys trust with a New Orleans audience. Get the food right — genuinely right, not approximated — and everything else follows. Get it wrong and no amount of operational efficiency will save the contract.</div>
@@ -1001,13 +1059,47 @@ p.caption { font-size: 12px; color: var(--muted); margin-top: 0.3rem; }
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════
-     SLIDE 18 — BIDDER STRATEGY MPLS
-════════════════════════════════════════════════════ -->
-<section class="slide slide-cream mpls-strategy" id="slide-18" data-label="MPLS Bid">
+<!-- NOLA SPONSORSHIP STRATEGY -->
+<section class="slide slide-spons nola-spons-strat" id="slide-strat-nola-spons" data-label="NOLA Spons Bid">
+  <div class="accent-bar-left" style="background:var(--spons)"></div>
+  <div class="eyebrow eyebrow-spons">Bidder Strategy · New Orleans · Sponsorship</div>
+  <h2 class="section-title">Caesars Superdome: How to Win the Sponsorship Revenue</h2>
+  <div class="strategy-hero fade-in">
+    <div class="strategy-hero-label">The one thing that matters most</div>
+    <div class="strategy-hero-text">NOLA's sponsorship story isn't about corporate density — it's about cultural resonance and tourism reach. Every brand in this market wants to own a piece of the city's identity. The operator who can credibly tell that story on behalf of a sponsor wins the deal.</div>
+  </div>
+  <div class="strategy-cols fade-in">
+    <div class="strategy-col">
+      <div class="strat-header do-header">✓ &nbsp; DO — Winning Themes</div>
+      <div class="strat-body">
+        <div class="strat-item"><span class="strat-icon do">✓</span><span>Lead with the naming rights re-competition — Caesars expires ~2027. Entergy, Ochsner, and Pan-American Life should all be in the room before the market RFP drops</span></div>
+        <div class="strat-item"><span class="strat-icon do">✓</span><span>Build the tourism overlay into every sponsorship pitch — 19M visitors means sponsors reach FAR more than just NOLA residents</span></div>
+        <div class="strat-item"><span class="strat-icon do">✓</span><span>Pitch Sazerac and Abita as an integrated spirits + craft beer program — the NOLA cultural authenticity story tells itself</span></div>
+        <div class="strat-item"><span class="strat-icon do">✓</span><span>Bring Raising Cane's and Popeyes to the table as founding hometown F&amp;B partners — they were literally born here</span></div>
+        <div class="strat-item"><span class="strat-icon do">✓</span><span>Structure Essence Festival and Bayou Classic as standalone presenting partnership opportunities — these events have their own unique sponsor value</span></div>
+        <div class="strat-item"><span class="strat-icon do">✓</span><span>Benchmark NOLA's sponsorship package against other tourism-driven venues (Las Vegas, New York) — not just NFL stadium comps</span></div>
+        <div class="strat-item"><span class="strat-icon do">✓</span><span>Formalize Entergy as Official Energy Partner with full category exclusivity — currently under-leveraged relative to their community commitment</span></div>
+      </div>
+    </div>
+    <div class="strategy-col">
+      <div class="strat-header dont-header">✗ &nbsp; AVOID — What Sinks a Bid</div>
+      <div class="strat-body">
+        <div class="strat-item"><span class="strat-icon dont">✗</span><span>Pitching only national brands at the expense of the regional brand ecosystem that defines NOLA's identity</span></div>
+        <div class="strat-item"><span class="strat-icon dont">✗</span><span>Ignoring the Caesars naming rights renewal — this is the single biggest near-term revenue event in the sponsorship calendar</span></div>
+        <div class="strat-item"><span class="strat-icon dont">✗</span><span>Pricing NOLA's sponsorship inventory against average NFL markets — the tourism overlay justifies a premium above-market rate</span></div>
+        <div class="strat-item"><span class="strat-icon dont">✗</span><span>Treating Essence Festival sponsors as separate from the venue's year-round sponsorship book — they're warm leads, not isolated activations</span></div>
+        <div class="strat-item"><span class="strat-icon dont">✗</span><span>Missing the healthcare category entirely — Ochsner employs 32,000 people and is actively building community-facing brand investment</span></div>
+        <div class="strat-item"><span class="strat-icon dont">✗</span><span>Ignoring Cox Communications — headquartered in NOLA and effectively the city's telecom monopoly. A natural digital/tech category anchor.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MPLS HOSPITALITY STRATEGY -->
+<section class="slide slide-cream mpls-strategy" id="slide-strat-mpls-hosp" data-label="MPLS F&amp;B Bid">
   <div class="accent-bar-left" style="background:var(--mpls)"></div>
-  <div class="eyebrow eyebrow-mpls">Bidder Strategy</div>
-  <h2 class="section-title">US Bank Stadium: How to Win the Bid</h2>
+  <div class="eyebrow eyebrow-mpls">Bidder Strategy · Minneapolis · Hospitality</div>
+  <h2 class="section-title">US Bank Stadium: How to Win the F&amp;B Contract</h2>
   <div class="strategy-hero fade-in">
     <div class="strategy-hero-label">The one thing that matters most</div>
     <div class="strategy-hero-text">The premium tier is the contract. If your suite and club program earns credibility with the corporate hospitality buyers and season-ticket holders who represent 37% of the building's affluent base, you win the economics. The rest of the building supports it — but don't mistake support revenue for the main event.</div>
@@ -1040,42 +1132,86 @@ p.caption { font-size: 12px; color: var(--muted); margin-top: 0.3rem; }
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════
-     SLIDE 19 — TAKEAWAYS
-════════════════════════════════════════════════════ -->
-<section class="slide slide-dark" id="slide-19" data-label="Takeaways">
-  <div class="accent-bar-left"></div>
+<!-- MPLS SPONSORSHIP STRATEGY -->
+<section class="slide slide-light mpls-spons-strat" id="slide-strat-mpls-spons" data-label="MPLS Spons Bid">
+  <div class="accent-bar-left" style="background:var(--spons)"></div>
+  <div class="eyebrow eyebrow-spons">Bidder Strategy · Minneapolis · Sponsorship</div>
+  <h2 class="section-title">US Bank Stadium: How to Win the Sponsorship Revenue</h2>
+  <div class="strategy-hero fade-in">
+    <div class="strategy-hero-label">The one thing that matters most</div>
+    <div class="strategy-hero-text">Every Fortune 500 company in this market is a prospect. But the deals that move the needle — UnitedHealth Group, Best Buy, Target, General Mills — are sitting in your backyard with no current anchor activation. The operator who shows up with a credible Fortune 500 pipeline pitch wins the confidence of the venue.</div>
+  </div>
+  <div class="strategy-cols fade-in">
+    <div class="strategy-col">
+      <div class="strat-header do-header">✓ &nbsp; DO — Winning Themes</div>
+      <div class="strat-body">
+        <div class="strat-item"><span class="strat-icon do">✓</span><span>Open with UnitedHealth Group as the Priority #1 unactivated whitespace — a $368B Fortune 500 in your backyard with no official venue deal is your first phone call</span></div>
+        <div class="strat-item"><span class="strat-icon do">✓</span><span>Pitch Best Buy as the "connected stadium" tech partner — AV, digital, smart building. Name it in the bid as a target and show the activation concept.</span></div>
+        <div class="strat-item"><span class="strat-icon do">✓</span><span>Build a Target cross-venue pitch — they already own Target Center. A US Bank Stadium relationship makes them the official retailer of all Minnesota sports.</span></div>
+        <div class="strat-item"><span class="strat-icon do">✓</span><span>Use the "#1 Fortune 500 per capita" stat as your headline market framing — it's unlike any other stadium in America</span></div>
+        <div class="strat-item"><span class="strat-icon do">✓</span><span>Structure Cargill and CHS as B2B suite/hospitality revenue even without consumer-facing activation — the largest private companies in America need client entertainment venues</span></div>
+        <div class="strat-item"><span class="strat-icon do">✓</span><span>Propose a General Mills concourse food concept as both a sponsorship asset and a hospitality differentiator — their brands belong in this building</span></div>
+        <div class="strat-item"><span class="strat-icon do">✓</span><span>Deepen the US Bank naming rights relationship beyond signage — loyalty integration, payment activation, employee/client experience upgrades</span></div>
+      </div>
+    </div>
+    <div class="strategy-col">
+      <div class="strat-header dont-header">✗ &nbsp; AVOID — What Sinks a Bid</div>
+      <div class="strat-body">
+        <div class="strat-item"><span class="strat-icon dont">✗</span><span>Presenting a national cookie-cutter sponsorship deck with no Minneapolis-specific corporate targets named</span></div>
+        <div class="strat-item"><span class="strat-icon dont">✗</span><span>Leaving UHG and Best Buy off the activation roadmap — these gaps are obvious to any informed venue decision-maker</span></div>
+        <div class="strat-item"><span class="strat-icon dont">✗</span><span>Pricing sponsorship inventory at average NFL market rates — the Fortune 500 density supports a meaningful premium</span></div>
+        <div class="strat-item"><span class="strat-icon dont">✗</span><span>Ignoring the craft beer and local spirits narrative — national pouring deals alone will feel generic to the Minneapolis audience and its corporate clients</span></div>
+        <div class="strat-item"><span class="strat-icon dont">✗</span><span>Failing to address Minneapolis' growing diverse communities in your sponsorship equity narrative — it's a civic blind spot your competitors will exploit</span></div>
+        <div class="strat-item"><span class="strat-icon dont">✗</span><span>Treating the sports betting category as a footnote — DraftKings, FanDuel, and BetMGM are among the fastest-growing NFL sponsors and Minnesota has active legalization momentum</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY TAKEAWAYS -->
+<section class="slide" id="slide-takeaways" data-label="Takeaways">
+  <div class="accent-bar-left" style="background:var(--gold)"></div>
   <div class="eyebrow eyebrow-gold">Key Takeaways</div>
-  <h2 class="section-title">What Every Hospitality Bidder Must Know</h2>
+  <h2 class="section-title" style="color:var(--off-white)">What Every Legends Strategist Must Know</h2>
   <div class="takeaway-grid fade-in">
     <div class="takeaway-card t1">
       <div class="takeaway-num">01</div>
-      <div class="takeaway-venue">New Orleans</div>
+      <div class="takeaway-venue">New Orleans · Hospitality</div>
       <p>Authenticity is currency. New Orleans' food culture is older than the country. A hospitality program that approximates Louisiana cuisine will be noticed — and penalized. The city's majority-Black community is underrepresented in current attendance; closing that gap is both a cultural responsibility and a revenue opportunity.</p>
     </div>
     <div class="takeaway-card t2">
       <div class="takeaway-num">02</div>
-      <div class="takeaway-venue">Minneapolis</div>
+      <div class="takeaway-venue">Minneapolis · Hospitality</div>
       <p>The premium tier is the product. Minneapolis is the most corporate-dense metro per capita in the world. US Bank Stadium is a client entertainment venue for Fortune 500 companies headquartered within 20 minutes. The suite and club program must be built to that standard — not a stadium standard.</p>
     </div>
     <div class="takeaway-card t3">
       <div class="takeaway-num">03</div>
-      <div class="takeaway-venue">Both venues</div>
-      <p>Ticket buyers are not the full market. At both venues, buyers earn $25–27K more than their metro median. The census data reveals who actually lives in each market — and those populations are more diverse, more economically constrained, and more culturally complex than the buyer sample alone suggests.</p>
+      <div class="takeaway-venue">New Orleans · Sponsorship</div>
+      <p>The naming rights re-competition is the biggest near-term opportunity in the NOLA sponsorship calendar. Caesars expires ~2027. Entergy, Ochsner, and Pan-American Life should be in conversations before the market RFP. The tourism overlay ($10.4B visitor spend annually) justifies pricing this asset above typical NFL market benchmarks.</p>
     </div>
     <div class="takeaway-card t4">
       <div class="takeaway-num">04</div>
-      <div class="takeaway-venue">Both venues</div>
-      <p>Event-aware programming separates winners from losers. Essence Festival is not Monster Jam. Morgan Wallen is not Kendrick Lamar. A single menu cannot serve all of these crowds equally. The operator who demonstrates event-specific F&B thinking in their bid will outperform the one who doesn't.</p>
+      <div class="takeaway-venue">Minneapolis · Sponsorship</div>
+      <p>Two gaps define the Minneapolis sponsorship opportunity: UnitedHealth Group (no activation for a $368B Fortune 500 HQ'd 15 minutes away) and Best Buy (no connected stadium tech partnership despite Richfield HQ and strong Minnesota identity). Both are Priority #1 calls. The Fortune 500 density here supports $35–50M/year in annual sponsorship revenue at full activation.</p>
+    </div>
+    <div class="takeaway-card t5">
+      <div class="takeaway-num">05</div>
+      <div class="takeaway-venue">Both Venues · Data</div>
+      <p>Ticket buyers are not the full market. At both venues, buyers earn $25–27K more than their metro median. The census data reveals who actually lives in each market — populations that are more diverse, more economically constrained, and more culturally complex than the buyer sample alone suggests. Use both data sources; they answer different questions.</p>
+    </div>
+    <div class="takeaway-card t6">
+      <div class="takeaway-num">06</div>
+      <div class="takeaway-venue">Both Venues · Strategy</div>
+      <p>Event-aware programming separates winners from losers — for both hospitality and sponsorship. Essence Festival is not Monster Jam. Morgan Wallen is not Kendrick Lamar. A single menu and a single sponsorship package cannot serve all of these crowds equally. The operator who demonstrates event-specific F&amp;B and sponsorship thinking in their bid will outperform the one who doesn't.</p>
     </div>
   </div>
 </section>
 
 <script>
-// ── PERSONA DATA ──────────────────────────────────────────────────────────────
+// ── PERSONA DATA ──
 const personas = [
   {
-    id: 10, name: "The Family Planner", tagline: "Making memories, one game at a time",
+    id: 'persona-family', name: "The Family Planner", tagline: "Making memories, one game at a time",
     venue: "Both venues", venueShort: "BOTH", headerClass: "gold-ph",
     accentColor: "#1C5F7A", share: "~27% of both venues",
     age: "35–49", income: "$75K–$149K", marital: "Married", kids: "Kids present", edu: "HS / some college",
@@ -1093,7 +1229,7 @@ const personas = [
     ]
   },
   {
-    id: 11, name: "The Summit Spender", tagline: "Here for the experience, not just the event",
+    id: 'persona-summit', name: "The Summit Spender", tagline: "Here for the experience, not just the event",
     venue: "US Bank Stadium", venueShort: "US BANK", headerClass: "mpls-ph",
     accentColor: "#1C5F7A", share: "~22% of US Bank",
     age: "42–58", income: "$200K+", marital: "Married", kids: "Older/grown", edu: "College / Graduate",
@@ -1111,7 +1247,7 @@ const personas = [
     ]
   },
   {
-    id: 12, name: "The Suburban Professional", tagline: "Reward yourself after a hard week",
+    id: 'persona-subpro', name: "The Suburban Professional", tagline: "Reward yourself after a hard week",
     venue: "Both venues", venueShort: "BOTH", headerClass: "gold-ph",
     accentColor: "#FFC000", share: "~18% of both venues",
     age: "38–52", income: "$100K–$199K", marital: "Married", kids: "Kids present", edu: "College / Graduate",
@@ -1128,7 +1264,7 @@ const personas = [
     ]
   },
   {
-    id: 13, name: "The NOLA Culture Queen", tagline: "Food is the event, not just the fuel",
+    id: 'persona-nolaqueen', name: "The NOLA Culture Queen", tagline: "Food is the event, not just the fuel",
     venue: "Superdome", venueShort: "SUPERDOME", headerClass: "nola-ph",
     accentColor: "#B85042", share: "~18% of Superdome",
     age: "28–44", income: "$35K–$99K", marital: "Single or Married", kids: "Often yes", edu: "High school",
@@ -1146,7 +1282,7 @@ const personas = [
     ]
   },
   {
-    id: 14, name: "The Budget-Savvy Young Fan", tagline: "In it for the energy, watching the spend",
+    id: 'persona-budgetfan', name: "The Budget-Savvy Young Fan", tagline: "In it for the energy, watching the spend",
     venue: "Superdome", venueShort: "SUPERDOME", headerClass: "green-ph",
     accentColor: "#3B6D11", share: "~21% of Superdome",
     age: "22–32", income: "Under $50K", marital: "Single", kids: "No", edu: "High school",
@@ -1163,7 +1299,7 @@ const personas = [
     ]
   },
   {
-    id: 15, name: "The Corporate Club-Seater", tagline: "The stadium is an extension of the boardroom",
+    id: 'persona-corpclub', name: "The Corporate Club-Seater", tagline: "The stadium is an extension of the boardroom",
     venue: "US Bank Stadium", venueShort: "US BANK", headerClass: "purple-ph",
     accentColor: "#534AB7", share: "~12% of US Bank",
     age: "45–60", income: "$175K–$250K+", marital: "Married", kids: "Older/grown", edu: "Graduate school",
@@ -1181,7 +1317,7 @@ const personas = [
     ]
   },
   {
-    id: 16, name: "The Comfortable Empty Nester", tagline: "Finally, time to enjoy the finer things",
+    id: 'persona-emptynester', name: "The Comfortable Empty Nester", tagline: "Finally, time to enjoy the finer things",
     venue: "Both venues", venueShort: "BOTH", headerClass: "amber-ph",
     accentColor: "#BA7517", share: "~10% of both venues",
     age: "52–68", income: "$100K–$200K+", marital: "Married", kids: "Grown / none", edu: "College / Graduate",
@@ -1194,16 +1330,15 @@ const personas = [
     ],
     premium: [
       { bold: "Premium club membership with comfortable seating and attentive service", text: " — elevated classics: prime rib, shrimp, quality salads. No gimmicks." },
-      { bold: "Non-alcoholic premium options", text: ": sparkling water, specialty mocktails, upscale soft drinks. This segment increasingly trends toward moderation and wants to be seen." },
+      { bold: "Non-alcoholic premium options", text: ": sparkling water, specialty mocktails, upscale soft drinks. This segment increasingly trends toward moderation." },
       { bold: "Loyalty and anniversary recognition", text: " — they've been attending for years. A complimentary upgrade or small gesture on a milestone visit creates outsized loyalty." },
     ]
   },
 ];
 
-// ── BUILD PERSONA OVERVIEW ────────────────────────────────────────────────────
+// ── BUILD PERSONA OVERVIEW ──
 const grid = document.getElementById('personaGrid');
-const colors = { 'BOTH': '#FFC000', 'US BANK': '#1C5F7A', 'SUPERDOME': '#B85042' };
-personas.forEach((p, i) => {
+personas.forEach(p => {
   const card = document.createElement('div');
   card.className = 'persona-overview-card';
   card.style.borderTopColor = p.accentColor;
@@ -1217,7 +1352,7 @@ personas.forEach((p, i) => {
   grid.appendChild(card);
 });
 
-// ── BUILD PERSONA DETAIL SLIDES ───────────────────────────────────────────────
+// ── BUILD PERSONA DETAIL SLIDES ──
 const personaContainer = document.getElementById('personaSlides');
 personas.forEach(p => {
   const fbHTML = p.concessions.map(c => `
@@ -1230,9 +1365,8 @@ personas.forEach(p => {
       <div class="fb-dash" style="background:${p.accentColor}"></div>
       <div class="fb-text"><strong>${c.bold}</strong>${c.text}</div>
     </div>`).join('');
-
   const sec = document.createElement('section');
-  sec.className = `slide persona-slide`;
+  sec.className = 'slide persona-slide';
   sec.id = `slide-${p.id}`;
   sec.setAttribute('data-label', p.name.split(' ').slice(-1)[0]);
   sec.innerHTML = `
@@ -1267,7 +1401,7 @@ personas.forEach(p => {
           ${fbHTML}
         </div>
         <div class="persona-section" style="margin-top:1.5rem">
-          <div class="persona-col-label" style="color:${p.accentColor}; border-color:${p.accentColor}">Premium dining & club</div>
+          <div class="persona-col-label" style="color:${p.accentColor}; border-color:${p.accentColor}">Premium dining &amp; club</div>
           ${premHTML}
         </div>
       </div>
@@ -1276,58 +1410,61 @@ personas.forEach(p => {
   personaContainer.appendChild(sec);
 });
 
-// ── CHAPTER MAP — which slides belong to which chapter ────────────────────────
+// ── CHAPTER MAP ──
 const chapterMap = {
-  overview:  { slides: ['slide-1','slide-2','slide-3'],   subs: [
-    { id:'slide-1', label:'Cover' },
-    { id:'slide-2', label:'Methods' },
-    { id:'slide-3', label:'At a Glance' },
+  overview:    { slides: ['slide-1','slide-2','slide-3','slide-4'], subs: [
+    { id:'slide-1', label:'Cover' }, { id:'slide-2', label:'Methods' }, { id:'slide-3', label:'At a Glance' }, { id:'slide-4', label:'Two Tracks' }
   ]},
-  nola:      { slides: ['slide-4','slide-5'],             subs: [
-    { id:'slide-4', label:'Market Deep Dive' },
-    { id:'slide-5', label:'Event Mix' },
+  'nola-hosp': { slides: ['ch-nola-hosp','slide-nola-market','slide-nola-events'], subs: [
+    { id:'slide-nola-market', label:'Market Deep Dive' }, { id:'slide-nola-events', label:'Event Mix' }
   ]},
-  mpls:      { slides: ['slide-6','slide-7'],             subs: [
-    { id:'slide-6', label:'Market Deep Dive' },
-    { id:'slide-7', label:'Event Mix' },
+  'nola-spons': { slides: ['ch-nola-spons','slide-nola-corps','slide-nola-cats','slide-nola-assets','slide-nola-comp'], subs: [
+    { id:'slide-nola-corps', label:'Corporate Landscape' }, { id:'slide-nola-cats', label:'Category Targets' }, { id:'slide-nola-assets', label:'Asset Inventory' }, { id:'slide-nola-comp', label:'Comp Set' }
   ]},
-  data:      { slides: ['slide-8'],                       subs: [
-    { id:'slide-8', label:'Census vs. Ticketing Data' },
+  'mpls-hosp': { slides: ['ch-mpls-hosp','slide-mpls-market','slide-mpls-events'], subs: [
+    { id:'slide-mpls-market', label:'Market Deep Dive' }, { id:'slide-mpls-events', label:'Event Mix' }
   ]},
-  personas:  { slides: ['slide-9', ...personas.map(p=>`slide-${p.id}`)], subs: [] }, // built after personas
-  strategy:  { slides: ['slide-17','slide-18','slide-19'], subs: [
-    { id:'slide-17', label:'New Orleans Bid' },
-    { id:'slide-18', label:'Minneapolis Bid' },
-    { id:'slide-19', label:'Key Takeaways' },
+  'mpls-spons': { slides: ['ch-mpls-spons','slide-mpls-corps','slide-mpls-cats','slide-mpls-assets','slide-mpls-comp'], subs: [
+    { id:'slide-mpls-corps', label:'Corporate Landscape' }, { id:'slide-mpls-cats', label:'Category Targets' }, { id:'slide-mpls-assets', label:'Asset Inventory' }, { id:'slide-mpls-comp', label:'Comp Set' }
+  ]},
+  data:        { slides: ['ch-data','slide-data-gaps'], subs: [
+    { id:'slide-data-gaps', label:'Census vs. Ticketing Data' }
+  ]},
+  personas:    { slides: ['ch-personas','slide-personas-overview'], subs: [] },
+  strategy:    { slides: ['ch-strategy','slide-strat-nola-hosp','slide-strat-nola-spons','slide-strat-mpls-hosp','slide-strat-mpls-spons','slide-takeaways'], subs: [
+    { id:'slide-strat-nola-hosp', label:'NOLA F&B Bid' },
+    { id:'slide-strat-nola-spons', label:'NOLA Spons Bid' },
+    { id:'slide-strat-mpls-hosp', label:'MPLS F&B Bid' },
+    { id:'slide-strat-mpls-spons', label:'MPLS Spons Bid' },
+    { id:'slide-takeaways', label:'Key Takeaways' }
   ]},
 };
 
-// ── INJECT PERSONA NAV ITEMS ──────────────────────────────────────────────────
+// Inject persona nav after build
 function injectPersonaNav() {
-  // Build the persona chapter subs
-  chapterMap.personas.subs = [{ id:'slide-9', label:'All Personas' }];
+  chapterMap.personas.slides = ['ch-personas','slide-personas-overview'];
+  chapterMap.personas.subs = [{ id:'slide-personas-overview', label:'All Personas' }];
   personas.forEach(p => {
+    chapterMap.personas.slides.push(`slide-${p.id}`);
     chapterMap.personas.subs.push({ id:`slide-${p.id}`, label: p.name.replace(/^The /, '') });
   });
 }
 injectPersonaNav();
 
-// ── BUILD SLIDE → CHAPTER LOOKUP ──────────────────────────────────────────────
+// ── SLIDE → CHAPTER LOOKUP ──
 const slideToChapter = {};
 Object.entries(chapterMap).forEach(([ch, cfg]) => {
   cfg.slides.forEach(id => { slideToChapter[id] = ch; });
 });
 
-// ── RENDER TIER 2 FOR A GIVEN CHAPTER ────────────────────────────────────────
+// ── RENDER TIER 2 ──
 const tier2 = document.getElementById('navTier2');
-
 function renderTier2(ch, activeSlideId) {
   const subs = chapterMap[ch]?.subs || [];
   tier2.setAttribute('data-ch', ch);
   tier2.innerHTML = subs.map(sub =>
     `<button class="nav-sub${sub.id === activeSlideId ? ' active' : ''}" data-slide="${sub.id}">${sub.label}</button>`
   ).join('');
-  // Re-attach click handlers
   tier2.querySelectorAll('.nav-sub').forEach(btn => {
     btn.addEventListener('click', () => {
       const t = document.getElementById(btn.dataset.slide);
@@ -1336,80 +1473,62 @@ function renderTier2(ch, activeSlideId) {
   });
 }
 
-// ── TAB CLICK — jump to first slide in chapter ────────────────────────────────
+// ── TAB CLICK ──
 document.querySelectorAll('.nav-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     const ch = tab.dataset.ch;
-    const firstSlide = chapterMap[ch]?.slides[0];
-    if (firstSlide) {
-      const el = document.getElementById(firstSlide);
-      if (el) el.scrollIntoView({ behavior:'smooth' });
-    }
+    const slides = chapterMap[ch]?.slides || [];
+    const firstSlide = slides.find(id => document.getElementById(id));
+    if (firstSlide) document.getElementById(firstSlide).scrollIntoView({ behavior:'smooth' });
   });
 });
 
-// ── SCROLL TRACKING ───────────────────────────────────────────────────────────
-const allSlides = document.querySelectorAll('.slide[id]');
-const total = allSlides.length;
-let currentSlideIdx = 0;
-
+// ── SCROLL TRACKING ──
+const allSlides = document.querySelectorAll('[id^="slide-"], [id^="ch-"]');
 function setActiveNav(slideId) {
   const ch = slideToChapter[slideId] || 'overview';
-  // Tier 1 tabs
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.toggle('active', t.dataset.ch === ch));
-  // Tier 2 sub-pages
   renderTier2(ch, slideId);
 }
 
 const scrollObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      currentSlideIdx = [...allSlides].indexOf(entry.target);
-      setActiveNav(entry.target.id);
-    }
+    if (entry.isIntersecting) setActiveNav(entry.target.id);
   });
-}, { threshold: 0.4 });
-
+}, { threshold: 0.35 });
 allSlides.forEach(s => scrollObserver.observe(s));
 
-// ── FADE-IN OBSERVER ──────────────────────────────────────────────────────────
+// ── FADE-IN OBSERVER ──
 const fadeObs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.15 });
+}, { threshold: 0.12 });
 document.querySelectorAll('.fade-in').forEach(el => fadeObs.observe(el));
 
-// ── KEYBOARD NAV ──────────────────────────────────────────────────────────────
+// ── KEYBOARD NAV ──
+const allSlideSections = [...document.querySelectorAll('.slide[id], .chapter-divider[id]')];
+let currentIdx = 0;
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown') {
-    if (currentSlideIdx < total - 1) { currentSlideIdx++; allSlides[currentSlideIdx].scrollIntoView({ behavior:'smooth' }); }
+    if (currentIdx < allSlideSections.length - 1) { currentIdx++; allSlideSections[currentIdx].scrollIntoView({ behavior:'smooth' }); }
   } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
-    if (currentSlideIdx > 0) { currentSlideIdx--; allSlides[currentSlideIdx].scrollIntoView({ behavior:'smooth' }); }
+    if (currentIdx > 0) { currentIdx--; allSlideSections[currentIdx].scrollIntoView({ behavior:'smooth' }); }
   }
 });
 
-// Init on load
+// Init
 setActiveNav('slide-1');
 
-// ── PASSWORD GATE ─────────────────────────────────────────────────────────────
-// Password is checked against a SHA-256 hash — plaintext never stored.
-// Current password: venue2026
+// ── PASSWORD GATE ──
 const HASH = '94d0b8cea53302fb9c35cbb4bf2b77e9ff495d92f48c5c06e8389aa990c417b7';
-
 async function sha256(str) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
 }
-
 function showApp() {
   document.getElementById('gate').classList.add('unlocked');
   document.getElementById('mainNav').style.display = 'flex';
 }
-
-// Persist unlock in sessionStorage so refreshing doesn't re-prompt
-if (sessionStorage.getItem('via_unlocked') === '1') {
-  showApp();
-}
-
+if (sessionStorage.getItem('via_unlocked') === '1') showApp();
 async function tryUnlock() {
   const val = document.getElementById('pwInput').value.trim();
   if (!val) return;
@@ -1425,12 +1544,8 @@ async function tryUnlock() {
     setTimeout(() => { err.textContent = ''; }, 3000);
   }
 }
-
 document.getElementById('pwBtn').addEventListener('click', tryUnlock);
-document.getElementById('pwInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') tryUnlock();
-});
-// Focus input on load
+document.getElementById('pwInput').addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
 document.getElementById('pwInput').focus();
 </script>
 </body>
