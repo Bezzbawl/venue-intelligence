@@ -370,6 +370,20 @@ h2.section-title {
 .tension-table td:first-child { font-weight: 600; color: var(--navy); font-size: 12px; width: 14%; }
 .tension-table td:nth-child(4) { font-weight: 600; color: var(--navy-mid); }
 .tension-callout { margin-top: 1.5rem; padding: 1rem 1.25rem; background: rgba(255,192,0,0.08); border-left: 3px solid var(--gold); font-size: 13px; color: var(--slate); line-height: 1.65; font-style: italic; }
+@media (max-width: 700px) {
+  .tension-table thead { display: none; }
+  .tension-table, .tension-table tbody, .tension-table tr, .tension-table td { display: block; width: 100%; }
+  .tension-table tr { border-bottom: 2px solid var(--navy); padding-bottom: 0.75rem; margin-bottom: 0.25rem; }
+  .tension-table tr:nth-child(even) td { background: transparent; }
+  .tension-table td { border: none; padding: 0.35rem 0; font-size: 13px; }
+  .tension-table td::before { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.15rem; }
+  .tension-table td:nth-child(1) { font-weight: 700; font-size: 14px; color: var(--navy); padding-top: 0.75rem; }
+  .tension-table td:nth-child(1)::before { content: none; }
+  .tension-table td:nth-child(2)::before { content: 'Ticketing Data Says'; }
+  .tension-table td:nth-child(3)::before { content: 'Census Says'; }
+  .tension-table td:nth-child(4)::before { content: 'Strategic Implication'; }
+  .tension-table td:nth-child(4) { font-weight: 400; }
+}
 
 /* ── PERSONA OVERVIEW ── */
 #slide-personas-overview { background: #1F3864; }
