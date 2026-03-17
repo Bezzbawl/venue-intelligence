@@ -455,6 +455,9 @@ h2.section-title {
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
 /* ── RESPONSIVE ── */
+/* ── TABLE SCROLL WRAPPER ── */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; }
+
 @media (max-width: 900px) {
   .cover-grid, .market-layout, .persona-body, .strategy-cols,
   .snapshot-grid, .method-grid, .takeaway-grid, .event-grid,
@@ -462,11 +465,10 @@ h2.section-title {
   .persona-overview-grid { grid-template-columns: repeat(2, 1fr); }
   .cat-grid { grid-template-columns: repeat(2, 1fr); }
   .slide { padding: 40px 5vw 50px; }
-  .tension-table td:nth-child(2), .tension-table td:nth-child(3) { display: none; }
-  /* table scroll + hide lowest-priority column */
-  .asset-table, .tension-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; }
+  /* hide lowest-priority columns */
   .asset-table td:nth-child(5), .asset-table th:nth-child(5) { display: none; }
   .asset-table td:first-child { width: auto; }
+  .tension-table td:nth-child(2), .tension-table th:nth-child(2) { display: none; }
 }
 @media (max-width: 430px) {
   .slide { padding: 28px 1.25rem max(2.5rem, env(safe-area-inset-bottom)); }
@@ -812,6 +814,7 @@ h2.section-title {
   <div class="eyebrow eyebrow-spons">New Orleans — Sponsorship Asset Inventory</div>
   <h2 class="section-title">What You're Selling. What It's Worth.</h2>
   <div class="fade-in">
+  <div class="table-scroll">
   <table class="asset-table">
     <thead><tr><th>Asset</th><th>Tier</th><th>Description</th><th>Est. Annual Value</th><th>Strategic Notes</th></tr></thead>
     <tbody>
@@ -825,6 +828,7 @@ h2.section-title {
       <tr><td>Concourse F&amp;B Integration</td><td><span class="asset-tier tier-base">Base</span></td><td>Branded QSR partnerships, named food concepts (e.g. "Raising Cane's" standalone kiosk). Lower-cost entry point with high foot traffic.</td><td class="asset-value">$100–300K/yr</td><td>Raising Cane's, Popeyes, Community Coffee are the first calls. These brands activate in their hometown venue — authenticity is free.</td></tr>
     </tbody>
   </table>
+  </div>
   <div class="asset-callout">Total estimated annual sponsorship revenue potential at Caesars Superdome: <strong>$12–18M/year</strong> across all categories at full activation. Current estimated revenue is likely $8–10M. The gap represents whitespace, especially in the spirits, QSR, and emerging tech categories.</div>
   </div>
 </section>
@@ -947,6 +951,7 @@ h2.section-title {
   <div class="eyebrow eyebrow-spons">Minneapolis — Sponsorship Asset Inventory</div>
   <h2 class="section-title">Premium Assets. Premium Market. Premium Pricing.</h2>
   <div class="fade-in">
+  <div class="table-scroll">
   <table class="asset-table">
     <thead><tr><th>Asset</th><th>Tier</th><th>Description</th><th>Est. Annual Value</th><th>Strategic Notes</th></tr></thead>
     <tbody>
@@ -960,6 +965,7 @@ h2.section-title {
       <tr><td>Scoreboard / Digital Inventory</td><td><span class="asset-tier tier-mid2">Mid-Tier</span></td><td>US Bank Stadium's ETFE roof structure and premium LED canopy are among the most premium digital canvas in the NFL. Rotating in-bowl + exterior signage packages.</td><td class="asset-value">$400K–1M/yr per category</td><td>The glass ETFE roof creates a unique visual backdrop for exterior projection activations. Premium markets support premium pricing — above-average CPM vs. comparable NFL venues.</td></tr>
     </tbody>
   </table>
+  </div>
   <div class="asset-callout">Total estimated annual sponsorship revenue potential at US Bank Stadium: <strong>$35–50M/year</strong> at full activation across all categories, consistent with top-tier NFL venue benchmarks. The Fortune 500 corporate infrastructure supports premium pricing at every tier — the opportunity gap is primarily in the tech and CPG activation categories.</div>
   </div>
 </section>
@@ -990,6 +996,7 @@ h2.section-title {
   <h2 class="section-title">Where Ticketing Data and Census Data Diverge</h2>
   <div class="tension-intro">Ticket buyers are a self-selected, upwardly mobile slice of each metro area. The gap between the buyer sample and the actual population reveals both current selection bias and untapped market potential.</div>
   <div class="fade-in">
+  <div class="table-scroll">
   <table class="tension-table">
     <thead><tr><th>Dimension</th><th>Ticketing data says</th><th>Census says</th><th>Strategic implication</th></tr></thead>
     <tbody>
@@ -1001,6 +1008,7 @@ h2.section-title {
       <tr><td>Tourism (NOLA)</td><td>Not flagged in ticketing data.</td><td>19M visitors, $10.4B spend annually.</td><td>Tourist overlay amplifies sponsorship value for travel, spirits, and CPG categories. Sponsors reach BOTH local and visitor audiences — a unique dual-market reach.</td></tr>
     </tbody>
   </table>
+  </div>
   <div class="tension-callout">The most important cross-track insight: Acxiom buyer data tells you how to price the hospitality program. Census data tells you how to build the sponsorship story. The most compelling sponsorship pitch uses both — showing brands the actual market opportunity, not just the current buyer sample.</div>
   </div>
 </section>
